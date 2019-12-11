@@ -1,0 +1,10 @@
+{
+  "usingComponents": {
+    "z-banner": "/components/banner/index",
+    "z-themes": "/components/themes/index",
+    "z-line": "/components/line/index",
+    "z-title": "/components/title/index",
+    "z-product": "/components/product/index",
+    "water-flow": "/dist/water-flow/index"
+  }
+}

@@ -1,0 +1,16 @@
+/* components/title/title.wxss */
+
+.title-container {
+  display: flex;
+  width: 750rpx;
+  height: 80rpx;
+  justify-content: center;
+  align-items: center;
+  background: #fff;
+}
+
+.title-text {
+  font-size: 30rpx;
+  color: #666;
+  font-weight: 500;
+}

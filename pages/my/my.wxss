@@ -1,0 +1,17 @@
+.avatar-box {
+  background: #2c61b4;
+  height: 150rpx;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 20rpx 40rpx;
+}
+
+.avatar-text {
+  color: #ffffff !important;
+}
+
+.menu-list {
+  box-sizing: border-box;
+  padding: 30rpx 40rpx;
+  width: 100%;
+}

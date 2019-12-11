@@ -1,0 +1,7 @@
+<swiper class="home-swiper" indicator-dots="{{true}}" autoplay="{{true}}" interval="{{5000}}" circular="{{true}}" duration="{{500}}">
+  <block wx:for="{{items}}" wx:key="id">
+    <swiper-item>
+      <image class="swiper-image" src="{{item.image}}" mode="aspectFit" data-banner-item="{{item}}" bind:tap="onImage" />
+    </swiper-item>
+  </block>
+</swiper>

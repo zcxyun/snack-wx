@@ -1,0 +1,2 @@
+<!--pages/theme/theme.wxml-->
+<text>{{id}}</text>

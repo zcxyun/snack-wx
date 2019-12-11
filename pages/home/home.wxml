@@ -1,0 +1,8 @@
+<view class="container">
+  <z-banner items="{{bannerItems}}" bind:tap-item="onTapBannerItem"></z-banner>
+  <z-title text="{{themeTitle}}"></z-title>
+  <z-themes items="{{themes}}" bind:click="onThemeClick"></z-themes>
+  <z-title text="{{recentProductTitle}}"></z-title>
+  <!-- <z-products items="{{recentProducts}}"></z-products> -->
+  <water-flow generic:l-water-flow-item="z-product" />
+</view>

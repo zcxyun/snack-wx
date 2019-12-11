@@ -1,0 +1,40 @@
+var format = function(text) {
+  if (text) {
+    var reg = getRegExp('\\n', 'g')
+    return text.replace(reg, '\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;')
+  }
+}
+
+var limit = function(arr, length) {
+  if (arr) {
+    return arr.slice(0, length)
+  }
+}
+
+var highlight = function(index) {
+  if (index == 0) {
+    return 'tag1'
+  } else if (index == 1) {
+    return 'tag2'
+  }
+  return ''
+}
+
+var classicType = function(typeNum) {
+  if (typeNum == 100) {
+    return '电影'
+  } else if (typeNum == 200) {
+    return '音乐'
+  } else if (typeNum == 300) {
+    return '句子'
+  } else {
+    return ''
+  }
+}
+
+module.exports = {
+  format: format,
+  limit: limit,
+  highlight: highlight,
+  classicType: classicType
+}

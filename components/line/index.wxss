@@ -1,0 +1,7 @@
+/* components/line/line.wxss */
+
+.line {
+  width: 750rpx;
+  background: #f2f2f2;
+  height: 20rpx;
+}

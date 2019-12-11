@@ -1,0 +1,7 @@
+<view class="themes-container">
+  <block wx:for="{{items}}" wx:key="id">
+    <z-line wx:if="{{index !== 0}}" />
+    <image class="theme-img-rect"
+      src="{{item.topic_img}}" data-theme="{{item}}" bind:tap="onImage"/>
+  </block>
+</view>

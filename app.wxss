@@ -1,0 +1,12 @@
+/**app.wxss**/
+page{
+    font-family: "PingFangSC-Thin";
+    font-size:32rpx;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-sizing: border-box;
+}

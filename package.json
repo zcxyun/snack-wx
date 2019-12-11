@@ -1,0 +1,20 @@
+{
+  "name": "snack-wx",
+  "version": "1.0.0",
+  "description": "小吃店微信小程序 (Lin UI)",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zcxyun/snack-wx.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/zcxyun/snack-wx/issues"
+  },
+  "homepage": "https://github.com/zcxyun/snack-wx#readme",
+  "dependencies": {}
+}

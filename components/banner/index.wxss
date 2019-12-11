@@ -1,0 +1,11 @@
+/* components/banner/banner.wxss */
+
+.home-swiper {
+  width: 750rpx;
+  height: 400rpx;
+}
+
+.swiper-image {
+  width: 750rpx;
+  height: 400rpx;
+}

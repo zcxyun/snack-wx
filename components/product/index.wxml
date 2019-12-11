@@ -1,0 +1,26 @@
+<!--components/product/product.wxml-->
+<l-card full
+  type="cover"
+  image="{{data.image}}"
+  title="{{data.name}}"
+  l-class="life-container"
+  l-img-class="life-img"
+  l-title-class="life-title"
+  bindtap="onProduct">
+  <view class='life-product-contianer'>
+    <!-- <view class='art-content'>{{data.summary}}</view> -->
+    <view class='price-container'>
+      <l-price
+        l-class="price"
+        value="{{data.price_str}}"
+        value-color="#ad0e11"
+        unit-color="#ad0e11"
+        value-size="36"></l-price>
+      <l-price
+        l-class="del-price"
+        value="{{data.price_str}}"
+        deleted
+        del-color="#666"></l-price>
+    </view>
+  </view>
+</l-card>

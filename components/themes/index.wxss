@@ -1,0 +1,15 @@
+/* components/themes/themes.wxss */
+.themes-container {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.theme-img-square {
+  width: 375rpx;
+  height: 375rpx;
+}
+
+.theme-img-rect {
+  width: 750rpx;
+  height: 400rpx;
+}

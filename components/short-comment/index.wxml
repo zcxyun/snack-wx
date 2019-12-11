@@ -1,0 +1,30 @@
+<wxs src="../../utils/filter.wxs" module="utils"></wxs>
+<view class="container">
+  <view class="comment-container" hidden="{{posting}}">
+    <view class="comment" bind:tap="onPost">
+      <text class="tip">输入短评</text>
+    </view>
+    <z-like class="like" like-status="{{likeStatus}}" like-count="{{favNums}}" read-only="{{readOnly}}" bind:like="onLike" />
+    <z-image-button open-type="share">
+      <image src="../../images/icon/share.png" slot="img" class="share-button" />
+    </z-image-button>
+  </view>
+  <view class="post-container" hidden="{{!posting}}">
+    <view class="header">
+      <text class="tip">{{postTip}}</text>
+      <text class="cancel" bind:tap="onPostCancel">取消</text>
+    </view>
+    <view class="tags">
+      <z-tags comments="{{utils.limit(comments, 3)}}" bind:click="onTag" />
+    </view>
+    <view class="post-input">
+      <input
+        placeholder="请在此输入短评"
+        placeholder-class="placeholder"
+        auto-focus="{{true}}"
+        bind:confirm="onConfirm"
+      />
+    </view>
+  </view>
+</view>
+<z-mask wx:if="{{posting}}" bind:tap="onMask" />

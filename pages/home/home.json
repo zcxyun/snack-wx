@@ -5,6 +5,9 @@
     "z-line": "/components/line/index",
     "z-title": "/components/title/index",
     "z-product": "/components/product/index",
-    "water-flow": "/dist/water-flow/index"
+    "z-searchbar": "/components/search-bar/index",
+    "z-product-search": "/components/product-search/index",
+    "l-water-flow": "/dist/water-flow/index",
+    "l-loadmore": "/dist/loadmore/index"
   }
 }

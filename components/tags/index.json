@@ -1,6 +1,6 @@
 {
   "component": true,
   "usingComponents": {
-    "z-tag": "/components/tag/tag"
+    "l-tag": "/dist/tag/index"
   }
 }

@@ -1,12 +1,20 @@
 <wxs src="../../utils/filter.wxs" module="utils"></wxs>
 <view class="tags">
-  <block wx:for="{{comments}}" wx:key="content">
-    <z-tag
+  <block wx:for="{{texts}}" wx:key="content">
+    <!-- <z-tag
       comment="{{item.content || item}}"
       tag-class="{{utils.highlight(index)}}"
       bind:click="onTag"
     >
       <text slot="nums" class="tag-nums" wx:if="{{item.nums}}">{{item.nums>999?'999+':item.nums}}</text>
-    </z-tag>
+    </z-tag> -->
+    <l-tag
+      name="{{item}}"
+      bg-color="{{utils.highlight(index)}}"
+      font-color="#666"
+      bind:lintap="onTag"
+    >
+      <text>{{item}}</text>
+    </l-tag>
   </block>
 </view>

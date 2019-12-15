@@ -1,8 +1,13 @@
 <view class="container">
+  <z-searchbar bind:tap="onTapSearchBar"/>
   <z-banner items="{{bannerItems}}" bind:tap-item="onTapBannerItem"></z-banner>
   <z-title text="{{themeTitle}}"></z-title>
   <z-themes items="{{themes}}" bind:click="onThemeClick"></z-themes>
   <z-title text="{{recentProductTitle}}"></z-title>
-  <!-- <z-products items="{{recentProducts}}"></z-products> -->
-  <water-flow generic:l-water-flow-item="z-product" />
+  <l-loadmore show="{{loadingMore}}" type="loading" line="{{true}}">
+    <view slot="content">
+      <l-water-flow generic:l-water-flow-item="z-product" column-gap="20rpx" />
+    </view>
+  </l-loadmore>
+  <l-loadmore show="{{isEnd}}" type="end" line="{{true}}"></l-loadmore>
 </view>

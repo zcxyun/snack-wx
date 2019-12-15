@@ -21,6 +21,8 @@ Component({
     searchKeys: '',
     focus: true,
     loadingSearch: false,
+    loadmoreType: 'loading',
+    searchPlaceHolder: '请输入要搜索的商品名'
   },
 
   observers: {
@@ -33,10 +35,11 @@ Component({
       }
       if (this._hasMore()) {
         this._lock(true)
-        const books = await productModel.search(
+        const res = await productModel.search(
           this.data.searchKeys, this._getCurrentStart())
-        if (books && books.models) {
-          this._setMoreData(books.models)
+        if (res && res.models) {
+          this._setMoreData(res.models)
+          wx.lin.renderWaterFlow(this.data.dataArray, true)
         }
         this._lock(false)
       } else {
@@ -47,18 +50,22 @@ Component({
 
   lifetimes: {
     async attached() {
-      const hotKeys = await keywordModel.getHotKeys()
-      const historyKeys = keywordModel.getHistoryKeys()
-      this.setData({
-        hotKeys,
-        historyKeys
-      })
+      this._getHotKeys()
+      this._getHistoryKeys()
     }
   },
   /**
    * 组件的方法列表
    */
   methods: {
+    async _getHotKeys() {
+      const hotKeys = await keywordModel.getHotKeys()
+      this.setData({hotKeys})
+    },
+    _getHistoryKeys() {
+      const historyKeys = keywordModel.getHistoryKeys()
+      this.setData({historyKeys})
+    },
     onCancel() {
       this._initPaginate()
       this.triggerEvent('cancel')
@@ -71,17 +78,23 @@ Component({
       this._focusInput()
     },
     async onConfirm(e) {
+      const text = e.detail.value || e.detail.name
+      if (!text) {
+        this._showToast(this.data.searchPlaceHolder)
+        return
+      }
       this._initPaginate()
       this._showLoadingSearch(true)
       this._searching(true)
-      const text = e.detail.value || e.detail.text
       this._setInputValue(text)
-      const books = await productModel.search(text)
-      if (books) {
-        this._addToHistory(text)
-        console.log(this.data.loadingSearch)
-        this._setTotal(books.total)
-        this._setMoreData(books.models)
+      const res = await productModel.search(text)
+      if (res) {
+        this._setKeys(text)
+        this._setTotal(res.total)
+        this._setMoreData(res.models)
+        wx.lin.renderWaterFlow(this.data.dataArray, true)
+      } else {
+        this._setNoResult(true)
       }
       this._showLoadingSearch(false)
     },
@@ -92,10 +105,13 @@ Component({
         this._initPaginate()
       }
     },
-    _addToHistory(text) {
+    async _setKeys(text) {
+      const hotKeys = await keywordModel.setHotKey(text)
       this.setData({
-        historyKeys: keywordModel.setHistoryKeys(text)
+        hotKeys,
+        historyKeys: keywordModel.setHistoryKey(text)
       })
+
     },
     _searching(searching) {
       this.setData({
@@ -115,6 +131,12 @@ Component({
     _focusInput() {
       this.setData({
         focus: true
+      })
+    },
+    _showToast(text) {
+      wx.showToast({
+        title: text,
+        icon: 'none'
       })
     },
   }

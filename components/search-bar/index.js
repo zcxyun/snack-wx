@@ -1,10 +1,13 @@
-// components/end-tip/end-tip.js
+// components/search-bar/search-bar.js
 Component({
   /**
    * 组件的属性列表
    */
   properties: {
-
+    text: {
+      type: String,
+      value: '搜索商品',
+    }
   },
 
   /**

@@ -3,9 +3,6 @@
     "l-button": "/dist/button/index",
     "l-loadmore": "/dist/loadmore/index",
     "l-list": "/dist/list/index",
-    "l-avatar": "/dist/avatar/index",
-    "z-products": "/components/products/index",
-    "z-end-tip": "/components/end-tip/index",
-    "z-empty-tip": "/components/empty-tip/index"
+    "l-avatar": "/dist/avatar/index"
   }
 }

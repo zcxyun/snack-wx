@@ -5,13 +5,20 @@ class Keyword extends Http {
   historyKeys = 'historyKeys'
   getHotKeys() {
     return this.request({
-      url: 'book/hot_keyword'
+      url: 'keyword/hots'
+    })
+  }
+  setHotKey(key) {
+    return this.request({
+      url: 'keyword',
+      method: 'POST',
+      data: {key}
     })
   }
   getHistoryKeys() {
     return wx.getStorageSync(this.historyKeys) || []
   }
-  setHistoryKeys(key) {
+  setHistoryKey(key) {
     const keys = this.getHistoryKeys()
     if (!keys.includes(key)) {
       keys.unshift(key)

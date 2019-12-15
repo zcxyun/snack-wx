@@ -3,7 +3,7 @@
   flex-wrap: wrap;
 }
 
-.tags > z-tag {
+.tags > l-tag {
   margin-right: 15rpx;
   margin-bottom: 10rpx;
 }
@@ -16,7 +16,7 @@
   background: #eefbff;
 } */
 
-.tag1 {
+/* .tag1 {
   background: #fffbdd !important;
 }
 
@@ -28,4 +28,4 @@
   margin-left: 10rpx;
   color: #aaa;
   font-size: 22rpx;
-}
+} */

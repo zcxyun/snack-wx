@@ -3,7 +3,8 @@
     <view class="search">
       <image src="images/search.png" />
       <input
-        placeholder="书籍名"
+        placeholder="{{searchPlaceHolder}}"
+        placeholder-style="color: #999"
         value="{{searchKeys}}"
         bind:confirm="onConfirm"
         focus="{{focus}}"
@@ -20,7 +21,7 @@
         <view class="vertical-line"></view>
         <text class="title">历史关键字</text>
       </view>
-      <z-tags comments="{{historyKeys}}" bind:click="onConfirm" />
+      <z-tags texts="{{historyKeys}}" bind:click="onConfirm" />
     </view>
 
     <view class="tags-box">
@@ -28,18 +29,21 @@
         <view class="vertical-line"></view>
         <text class="title">热门关键字</text>
       </view>
-      <z-tags comments="{{hotKeys}}" bind:click="onConfirm" />
+      <z-tags texts="{{hotKeys}}" bind:click="onConfirm" />
     </view>
   </view>
 
   <view class="search-result" wx:if="{{searching}}">
-    <z-books books="{{dataArray}}"/>
-    <view class="loading-more">
-      <z-loading wx:if="{{loadingMore}}" />
-    </view>
-    <z-end-tip wx:if="{{isEnd}}" />
+    <l-loadmore show="{{loadingMore}}" type="loading" line="{{true}}">
+      <view slot="content">
+        <l-water-flow generic:l-water-flow-item="z-product" column-gap="20rpx" />
+      </view>
+    </l-loadmore>
+    <l-loadmore show="{{isEnd}}" type="end" line="{{true}}"></l-loadmore>
   </view>
 
-  <z-loading class="loading-search" wx:if="{{loadingSearch}}" />
-  <z-empty-tip wx:if="{{noResult}}" />
+  <l-loading bg-color="#f3f3f3" z-index="776" opacity="1" show="{{loadingSearch}}">
+    <view slot="content" style="height: 600rpx; width:100%"></view>
+  </l-loading>
+  <l-status-show show="{{noResult}}" type="data" />
 </view>

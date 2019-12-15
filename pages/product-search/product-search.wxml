@@ -1,0 +1,2 @@
+<!--pages/product-search/product-search.wxml-->
+<z-product-search bind:cancel="onCancelSearch" more="{{more}}" />

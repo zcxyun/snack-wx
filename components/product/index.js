@@ -18,6 +18,11 @@ Component({
    * 组件的方法列表
    */
   methods: {
-
+    onProduct(e) {
+      const {id} = e.currentTarget.dataset
+      wx.navigateTo({
+        url: `/pages/product/product?id=${id}`
+      })
+    }
   }
 })

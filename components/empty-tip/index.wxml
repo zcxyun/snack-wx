@@ -1,1 +1,0 @@
-  <view class="empty-tip">{{content}}</view>

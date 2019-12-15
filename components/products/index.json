@@ -1,0 +1,7 @@
+{
+  "component": true,
+  "usingComponents": {
+    "water-flow": "/dist/water-flow/index",
+    "z-product": "/components/product/index"
+  }
+}

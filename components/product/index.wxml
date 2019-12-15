@@ -6,7 +6,8 @@
   l-class="life-container"
   l-img-class="life-img"
   l-title-class="life-title"
-  bindtap="onProduct">
+  data-id="{{data.id}}"
+  bind:tap="onProduct">
   <view class='life-product-contianer'>
     <!-- <view class='art-content'>{{data.summary}}</view> -->
     <view class='price-container'>

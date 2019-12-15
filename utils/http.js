@@ -24,9 +24,6 @@ export default class Http {
   async dealRes(res, reqOriginConfig, refetch) {
     const statusCode = res.statusCode.toString()
     if (statusCode.startsWith('2')) {
-      if (statusCode === '201') {
-        this.showToast(res.data.msg)
-      }
       return res.data
     } else {
       console.log(res.data)

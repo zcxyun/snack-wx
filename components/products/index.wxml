@@ -1,2 +1,0 @@
-<!--components/products/index.wxml-->
-<water-flow generic:l-water-flow-item="z-product" column-gap="6rpx"/>

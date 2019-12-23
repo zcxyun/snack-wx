@@ -1,2 +1,53 @@
 <!--pages/product/product.wxml-->
-<text>{{id}}</text>
+<view class="product-container">
+  <image class="head-img" src="{{product.image}}" mode="widthFix" bind:tap="onHeadImg" />
+  <view class="main-info">
+    <view class="title-box">
+      <view>
+        <text class="title">{{product.name}}</text>
+        <z-like likeStatus="{{likeStatus}}" likeCount="{{likeCount}}" bind:like="onLike" />
+      </view>
+      <l-button special="{{true}}" open-type="share">
+        <view class="share-box">
+          <l-icon size="30" name="share" color="#3683d6" />
+          <text class="share-text">分享</text>
+        </view>
+      </l-button>
+    </view>
+    <view class="summary"><text>{{product.summary}}</text></view>
+    <view class="price-box">
+      <l-price l-class="price" value="{{product.price_str}}" color="#F56C6C" value-size="40"></l-price>
+      <l-price l-class="del-price" value="{{product.price_str}}" deleted value-size="30"></l-price>
+    </view>
+  </view>
+  <l-segment bind:linchange="changeTabs" l-header-class="segment">
+    <l-segment-item wx:for="{{tabs}}" wx:key="key" tab="{{item.tab}}" key="{{item.key}}" />
+  </l-segment>
+  <view class="detail-imgs" hidden="{{currentTab !== 'detail'}}">
+    <block wx:for="{{product.desc_imgs}}" wx:key="order">
+      <view><image src="{{item.image}}" class="detail-img" mode="widthFix"/></view>
+    </block>
+  </view>
+  <view class="params-box" hidden="{{currentTab !== 'params'}}">
+    <view>
+      <view class="key" wx:for="{{product.properties}}" wx:key="name">{{item.name}}</view>
+    </view>
+    <view>
+      <view class="value" wx:for="{{product.properties}}" wx:key="name">{{item.detail}}</view>
+    </view>
+  </view>
+  <view class="comments-box" hidden="{{currentTab !== 'comments'}}">
+    <view style="height: 20rpx;"></view>
+    <z-tags texts="{{comments}}" />
+    <view style="height: 20rpx;"></view>
+    <z-short-comment comments="{{tapComments}}" bind:click-tag="postComment" bind:input-confirm="postComment" />
+  </view>
+</view>
+<z-product-foot-bar
+  product="{{product}}"
+  bind:to-home="onTapHome"
+  bind:to-cart="onTapCart"
+  bind:add-to-cart="onAddToCart"
+  bind:now-buy="onNowBuy"
+  ></z-product-foot-bar>
+<l-loading full-screen show="{{loading}}" />

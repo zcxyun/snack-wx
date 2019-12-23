@@ -1,0 +1,31 @@
+<l-tabs
+  bind:linchange="changeTabs"
+  animated="{{true}}"
+  animated-for-line="{{true}}"
+  swipeable="{{true}}"
+  has-line="{{true}}"
+  scrollable="{{true}}"
+  placement="left"
+  l-header-class="l-header-class"
+  l-line-class="l-line-class"
+  l-content-class="l-content-class"
+  >
+  <block wx:for="{{data}}" wx:key="id" wx:for-item="category">
+    <l-tabpanel tab="{{category.name}}" key="{{category.id}}" slot="{{category.id}}">
+      <view class="content-container">
+        <image class="header-img" src="{{category.image}}" />
+        <view class="products">
+          <block wx:for="{{category.products}}" wx:for-item="product" wx:key="id">
+            <view class="product" bind:tap="onProduct" data-id="{{product.id}}">
+              <image class="product-img" src="{{product.image}}" />
+              <text class="product-name">{{product.name}}</text>
+            </view>
+          </block>
+        </view>
+        <view class="more">
+          <text bind:tap="onMore" data-id="{{category.id}}">更多 <l-icon name="more" /></text>
+        </view>
+      </view>
+    </l-tabpanel>
+  </block>
+</l-tabs>

@@ -1,0 +1,9 @@
+{
+  "usingComponents": {
+    "l-water-flow": "/dist/water-flow/index",
+    "l-loading": "/dist/loading/index",
+    "l-loadmore": "/dist/loadmore/index",
+    "l-status-show": "/dist/status-show/index",
+    "z-product": "/components/product/index"
+  }
+}

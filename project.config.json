@@ -60,6 +60,28 @@
 					"id": -1,
 					"name": "pages/my/my",
 					"pathName": "pages/my/my",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/category/category",
+					"pathName": "pages/category/category",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/product-search/product-search",
+					"pathName": "pages/product-search/product-search",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": 3,
+					"name": "pages/product/product",
+					"pathName": "pages/product/product",
+					"query": "id=1",
 					"scene": null
 				}
 			]

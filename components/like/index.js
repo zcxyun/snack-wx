@@ -1,5 +1,5 @@
 // components/like/like.js
-import {getLoginStatusOfStorage} from '../../utils/util.js'
+// import {getLoginStatusOfStorage} from '../../utils/util.js'
 
 Component({
   /**
@@ -24,20 +24,20 @@ Component({
    */
   methods: {
     onLike(e) {
-      if (!getLoginStatusOfStorage()) {
-        wx.showModal({
-          title: '提示',
-          content: '请先登录',
-          success(res) {
-            if (res.confirm) {
-              wx.switchTab({
-                url: '/pages/my/my'
-              })
-            }
-          }
-        })
-        return
-      }
+      // if (!getLoginStatusOfStorage()) {
+      //   wx.showModal({
+      //     title: '提示',
+      //     content: '请先登录',
+      //     success(res) {
+      //       if (res.confirm) {
+      //         wx.switchTab({
+      //           url: '/pages/my/my'
+      //         })
+      //       }
+      //     }
+      //   })
+      //   return
+      // }
       if (this.properties.readOnly) {
         return
       }

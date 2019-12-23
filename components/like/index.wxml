@@ -1,4 +1,3 @@
-<!--components/like/like.wxml-->
 <view class="like-container" catchtap="onLike">
   <image src="{{likeStatus?likeSrc:disLikeSrc}}"></image>
   <text>{{likeCount}}</text>

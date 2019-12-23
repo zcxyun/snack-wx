@@ -1,0 +1,10 @@
+{
+  "component": true,
+  "usingComponents": {
+    "l-icon": "/dist/icon/index",
+    "l-card": "/dist/card/index",
+    "l-price": "/dist/price/index",
+    "l-mask": "/dist/mask/index",
+    "l-counter": "/dist/counter/index"
+  }
+}

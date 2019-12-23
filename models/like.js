@@ -1,19 +1,21 @@
 import Http from '../utils/http.js'
 
 class Like extends Http {
-   like(id, type, isLike) {
+   like(id) {
      return this.request({
-       url: isLike ? 'like' : 'like/cancel',
-       method: 'POST',
-       data: {
-         art_id: id,
-         type
-       }
+       url: `like/product/${id}`,
+       method: 'PUT',
      })
    }
-   getFavor(type, id) {
+   unlike(id) {
+    return this.request({
+      url: `like/cancel/product/${id}`,
+      method: 'PUT',
+    })
+   }
+   getFavor(id) {
      return this.request({
-       url: `classic/${type}/${id}/favor`
+        url: `like/info/product/${id}`
      })
    }
  }

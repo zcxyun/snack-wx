@@ -10,7 +10,8 @@ Component({
     bannerItems: [],
     themes: [],
     themeTitle: '精选主题',
-    recentProductTitle: '最新产品',
+    recentProductTitle: '产品列表',
+    loading: false,
   },
   methods: {
     /**
@@ -21,16 +22,21 @@ Component({
     },
 
     async init () {
-      const bannerItems = await bannerModel.get(bannerModel.idMap['首页置顶'])
-      const themes = await themeModel.getAll()
-      const res = await productModel.getPaginate(0)
+      this._loading(true)
+      const bannerItemsPromise = bannerModel.get(bannerModel.idMap['首页置顶'])
+      const themesPromise = themeModel.getAll()
+      const productsPromise = productModel.getPaginate(0)
+      const bannerItems = await bannerItemsPromise
+      const themes = await themesPromise
+      const res = await productsPromise
       this._setMoreData(res.models)
       this._setTotal(res.total)
-      wx.lin.renderWaterFlow(this.data.dataArray, true)
+      wx.lin.renderWaterFlow(res.models, false)
       this.setData({
         bannerItems,
         themes,
       })
+      this._loading(false)
     },
 
     onTapBannerItem(e) {
@@ -41,7 +47,7 @@ Component({
         })
       } else if (type === 3) {
         wx.navigateTo({
-          url: `/pages/theme/theme?id=${id}`
+          url: `/pages/products/products?type=theme&id=${id}`
         })
       }
     },
@@ -49,7 +55,7 @@ Component({
     onThemeClick(e) {
       const {id} = e.detail
       wx.navigateTo({
-        url: `/pages/theme/theme?id=${id}`
+        url: `/pages/products/products?type=theme&id=${id}`
       })
     },
 
@@ -57,6 +63,10 @@ Component({
       wx.navigateTo({
         url: '/pages/product-search/product-search'
       })
+    },
+
+    _loading(loading) {
+      this.setData({loading})
     },
 
     /**
@@ -106,7 +116,7 @@ Component({
         const res = await productModel.getPaginate(this._getCurrentStart())
         if (res && res.models) {
           this._setMoreData(res.models)
-          wx.lin.renderWaterFlow(this.data.dataArray, true)
+          wx.lin.renderWaterFlow(res.models, false)
         }
         this._lock(false)
       } else {

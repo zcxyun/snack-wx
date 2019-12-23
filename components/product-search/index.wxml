@@ -1,19 +1,13 @@
-<view class="search-container">
-  <view class="search-bar">
-    <view class="search">
-      <image src="images/search.png" />
-      <input
-        placeholder="{{searchPlaceHolder}}"
-        placeholder-style="color: #999"
-        value="{{searchKeys}}"
-        bind:confirm="onConfirm"
-        focus="{{focus}}"
-        bind:input="onInput"
-      />
-      <image src="images/cancel.png" bind:tap="onClear" />
-    </view>
-    <text class="cancel" bind:tap="onCancel">取消</text>
-  </view>
+<view class="container">
+  <l-search-bar
+    placeholder="{{searchPlaceHolder}}"
+    shape="primary"
+    value="{{searchKeys}}"
+    clear="{{true}}"
+    bind:lincancel="onCancel"
+    bind:linconfirm="onConfirm"
+    l-container-class="search-bar-container"
+  />
 
   <view class="keyword-container" wx:if="{{!searching}}">
     <view class="tags-box">
@@ -36,13 +30,13 @@
   <view class="search-result" wx:if="{{searching}}">
     <l-loadmore show="{{loadingMore}}" type="loading" line="{{true}}">
       <view slot="content">
-        <l-water-flow generic:l-water-flow-item="z-product" column-gap="20rpx" />
+        <l-water-flow generic:l-water-flow-item="z-product" column-gap="-30rpx" />
       </view>
     </l-loadmore>
     <l-loadmore show="{{isEnd}}" type="end" line="{{true}}"></l-loadmore>
   </view>
 
-  <l-loading bg-color="#f3f3f3" z-index="776" opacity="1" show="{{loadingSearch}}">
+  <l-loading z-index="776" opacity="1" show="{{loadingSearch}}">
     <view slot="content" style="height: 600rpx; width:100%"></view>
   </l-loading>
   <l-status-show show="{{noResult}}" type="data" />

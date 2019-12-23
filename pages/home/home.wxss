@@ -1,1 +1,5 @@
 /* pages/home/home.wxss */
+
+.search-bar {
+  margin-bottom: 20rpx;
+}

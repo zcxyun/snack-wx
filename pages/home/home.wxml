@@ -1,5 +1,5 @@
 <view class="container">
-  <z-searchbar bind:tap="onTapSearchBar"/>
+  <z-search-bar bind:tap="onTapSearchBar" class="search-bar" />
   <z-banner items="{{bannerItems}}" bind:tap-item="onTapBannerItem"></z-banner>
   <z-title text="{{themeTitle}}"></z-title>
   <z-themes items="{{themes}}" bind:click="onThemeClick"></z-themes>
@@ -11,3 +11,4 @@
   </l-loadmore>
   <l-loadmore show="{{isEnd}}" type="end" line="{{true}}"></l-loadmore>
 </view>
+<l-loading full-screen show="{{loading}}" />

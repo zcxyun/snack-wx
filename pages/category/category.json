@@ -1,3 +1,6 @@
 {
-  "usingComponents": {}
+  "usingComponents": {
+    "z-category-products": "/components/category-products/index",
+    "l-loading": "/dist/loading/index"
+  }
 }

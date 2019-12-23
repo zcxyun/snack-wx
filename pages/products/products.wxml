@@ -1,0 +1,33 @@
+<!--pages/products/products.wxml-->
+<wxs module="utils">
+  var getHeaderImgByType = function(type) {
+    if (type == 'theme') {
+      return 'theme-header-img'
+    } else if (type == 'category') {
+      return 'category-header-img'
+    }
+    return ''
+  }
+  module.exports = {
+    getHeaderImgByType: getHeaderImgByType
+  }
+</wxs>
+<view class="products-container">
+  <image class="header-img" src="{{headerImg}}" mode="widthFix" />
+  <l-loadmore show="{{loadingMore}}" type="loading" line="{{true}}">
+    <view slot="content">
+      <l-water-flow generic:l-water-flow-item="z-product" column-gap="20rpx" />
+    </view>
+  </l-loadmore>
+  <l-loadmore show="{{isEnd}}" type="end" line="{{true}}"></l-loadmore>
+</view>
+<l-loading
+  bg-color="#fff"
+  z-index="776"
+  opacity="1"
+  show="{{loading}}"
+  full-screen="{{true}}">
+  <!-- <view slot="content" style="height: 600rpx; width:100%"></view> -->
+</l-loading>
+<l-status-show show="{{noResult}}" type="data" />
+

@@ -6,6 +6,7 @@
     "l-status-show": "/dist/status-show/index",
     "l-loadmore": "/dist/loadmore/index",
     "l-loading": "/dist/loading/index",
-    "l-water-flow": "/dist/water-flow/index"
+    "l-water-flow": "/dist/water-flow/index",
+    "l-search-bar": "/dist/search-bar/index"
   }
 }

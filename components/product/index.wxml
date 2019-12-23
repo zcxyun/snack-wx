@@ -3,25 +3,27 @@
   type="cover"
   image="{{data.image}}"
   title="{{data.name}}"
-  l-class="life-container"
-  l-img-class="life-img"
-  l-title-class="life-title"
+  l-class="l-card-container"
+  l-img-class="l-card-img"
+  l-title-class="l-card-title"
   data-id="{{data.id}}"
   bind:tap="onProduct">
-  <view class='life-product-contianer'>
-    <!-- <view class='art-content'>{{data.summary}}</view> -->
+  <view class='product-contianer'>
     <view class='price-container'>
       <l-price
         l-class="price"
         value="{{data.price_str}}"
-        value-color="#ad0e11"
-        unit-color="#ad0e11"
-        value-size="36"></l-price>
+        value-color="#F56C6C"
+        unit-color="#F56C6C"
+        value-size="30"></l-price>
       <l-price
         l-class="del-price"
         value="{{data.price_str}}"
         deleted
-        del-color="#666"></l-price>
+        del-color="#666"
+        value-size="25"
+        ></l-price>
     </view>
+    <!-- <view class='summary'>{{data.summary}}</view> -->
   </view>
 </l-card>

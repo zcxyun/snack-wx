@@ -4,16 +4,16 @@
     "pages/category/category",
     "pages/cart/cart",
     "pages/my/my",
-    "pages/theme/theme",
     "pages/product/product",
+    "pages/products/products",
     "pages/product-search/product-search",
     "pages/order/order",
     "pages/pay-result/pay-result"
   ],
   "window": {
     "backgroundTextStyle": "light",
-    "backgroundColor": "#FFFFFF",
-    "navigationBarBackgroundColor": "#2c61b4",
+    "backgroundColor": "#ffffff",
+    "navigationBarBackgroundColor": "#ffffff",
     "navigationBarTitleText": "",
     "navigationBarTextStyle": "black",
     "enablePullDownRefresh": true

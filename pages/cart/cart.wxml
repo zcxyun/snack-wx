@@ -1,2 +1,8 @@
 <!--pages/cart/cart.wxml-->
-<text>pages/cart/cart.wxml</text>
+<view class="cart-container">
+  <block wx:for="{{products}}">
+    <view class="product-box">
+
+    </view>
+  </block>
+</view>

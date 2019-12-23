@@ -1,7 +1,8 @@
 {
   "component": true,
   "usingComponents": {
-    "l-button": "/dist/button/index",
+    "l-tabs": "/dist/tabs/index",
+    "l-tabpanel": "/dist/tabpanel/index",
     "l-icon": "/dist/icon/index"
   }
 }

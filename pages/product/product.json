@@ -1,3 +1,14 @@
 {
-  "usingComponents": {}
+  "usingComponents": {
+    "z-product-foot-bar": "/components/product-foot-bar/index",
+    "z-short-comment": "/components/short-comment/index",
+    "z-tags": "/components/tags/index",
+    "z-like": "/components/like/index",
+    "l-loading": "/dist/loading/index",
+    "l-price": "/dist/price/index",
+    "l-button": "/dist/button/index",
+    "l-icon": "/dist/icon/index",
+    "l-segment": "/dist/segment/index",
+    "l-segment-item": "/dist/segment-item/index"
+  }
 }

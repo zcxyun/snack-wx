@@ -19,7 +19,6 @@ Component({
     historyKeys: [],
     searching: false,
     searchKeys: '',
-    focus: true,
     loadingSearch: false,
     loadmoreType: 'loading',
     searchPlaceHolder: '请输入要搜索的商品名'
@@ -39,7 +38,7 @@ Component({
           this.data.searchKeys, this._getCurrentStart())
         if (res && res.models) {
           this._setMoreData(res.models)
-          wx.lin.renderWaterFlow(this.data.dataArray, true)
+          wx.lin.renderWaterFlow(res.models, false)
         }
         this._lock(false)
       } else {
@@ -68,14 +67,9 @@ Component({
     },
     onCancel() {
       this._initPaginate()
-      this.triggerEvent('cancel')
-    },
-    onClear() {
-      this._initPaginate()
       this._searching(false)
       this._showLoadingSearch(false)
       this._setInputValue('')
-      this._focusInput()
     },
     async onConfirm(e) {
       const text = e.detail.value || e.detail.name
@@ -92,18 +86,11 @@ Component({
         this._setKeys(text)
         this._setTotal(res.total)
         this._setMoreData(res.models)
-        wx.lin.renderWaterFlow(this.data.dataArray, true)
+        wx.lin.renderWaterFlow(res.models, false)
       } else {
         this._setNoResult(true)
       }
       this._showLoadingSearch(false)
-    },
-    onInput(e) {
-      if (e.detail.value.length == 0) {
-        this._searching(false)
-        this._showLoadingSearch(false)
-        this._initPaginate()
-      }
     },
     async _setKeys(text) {
       const hotKeys = await keywordModel.setHotKey(text)
@@ -126,11 +113,6 @@ Component({
     _setInputValue(searchKeys) {
       this.setData({
         searchKeys
-      })
-    },
-    _focusInput() {
-      this.setData({
-        focus: true
       })
     },
     _showToast(text) {

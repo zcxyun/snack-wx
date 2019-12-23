@@ -1,0 +1,43 @@
+<view>
+  <view class="foot-bar-container" wx:if="{{!showOptionPanel}}">
+    <view class="home-cart-box">
+      <view class="home-box center" bind:tap="onHome">
+        <l-icon name="setting" />
+        <text>首页</text>
+      </view>
+      <view class="cart-box center" bind:tap="onCart">
+        <l-icon name="cart"></l-icon>
+        <text>购物车</text>
+      </view>
+    </view>
+    <view class="add-cart center" bind:tap="onAddCart">
+      <text>加入购物车</text>
+    </view>
+    <view class="buy center" bind:tap="onBuy">
+      <text>立即购买</text>
+    </view>
+  </view>
+  <view class="option-box" wx:else >
+    <l-card type="primary" full image="{{product.image}}" title="{{product.name}}">
+      <view class="price-box">
+        <l-price unit="￥" value="{{product.price_str}}"
+          color="#ad0e11" unit-size="25" value-size="30"></l-price>
+        <l-price l-class="old-price" unit="￥"
+          value="{{product.price_str}}" deleted size="25"></l-price>
+      </view>
+      <view class="product-nums-box" wx:if="{{product.stock > 0}}">
+        <text class="product-nums-text">购买数量</text>
+        <l-counter max="{{maxCount}}" count="{{cartCount}}"
+          bind:lintap="onCounter" bind:linout="onCounterOverflow" />
+      </view>
+      <view class="no-stock" wx:else >暂没有库存</view>
+    </l-card>
+    <view wx:if="{{optionType === 'addToCart'}}" class="foot-button-cart center" bind:tap="addToCart">加入购物车</view>
+    <view wx:elif="{{optionType === 'nowBuy'}}" class="foot-button-buy center" bind:tap="nowBuy">立即购买</view>
+  </view>
+  <l-mask
+    show="{{showOptionPanel}}"
+    bind:lintap="onMask"
+    opacity="0.3"
+  ></l-mask>
+</view>

@@ -1,32 +1,22 @@
 .search-container {
-  border-top: 1px solid #f5f5f5;
-  border-bottom: 1px solid #f5f5f5;
   display: flex;
   justify-content: center;
   align-items: center;
   width: 750rpx;
-  height: 100rpx;
   background: #fff;
-  box-shadow: 0 0 3px 0 #e3e3e3;
 }
 
 .search {
-  background: #f5f5f5;
-  border-radius: 50rpx;
+  background: #f3f3f3;
   width: 700rpx;
-  height: 68rpx;
-  color: #999;
+  height: 55rpx;
+  color: #aaa;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.search > image {
-  width: 28rpx;
-  height: 28rpx;
-}
-
-.search > text {
-  font-size: 32rpx;
+.placeholder {
+  font-size: 25rpx;
   margin-left: 20rpx;
 }

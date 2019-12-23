@@ -5,12 +5,6 @@ var format = function(text) {
   }
 }
 
-var limit = function(arr, length) {
-  if (arr) {
-    return arr.slice(0, length)
-  }
-}
-
 var highlight = function(index) {
   if (index == 0) {
     return '#fffbdd'
@@ -22,6 +16,5 @@ var highlight = function(index) {
 
 module.exports = {
   format: format,
-  limit: limit,
   highlight: highlight
 }

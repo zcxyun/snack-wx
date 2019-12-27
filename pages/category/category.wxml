@@ -1,6 +1,6 @@
-<z-category-products
+<z-category-products-segment
   data="{{categories}}"
-  bind:changeTabs="onChangeTabs"
+  bind:change-tabs="onChangeTabs"
   bind:tap-product="onTapProduct"
   bind:tap-more="onTapMore"
   />

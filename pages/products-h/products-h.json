@@ -1,0 +1,8 @@
+{
+  "usingComponents": {
+    "l-loading": "/dist/loading/index",
+    "l-loadmore": "/dist/loadmore/index",
+    "l-status-show": "/dist/status-show/index",
+    "z-product-h": "/components/product-h/index"
+  }
+}

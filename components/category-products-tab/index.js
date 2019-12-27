@@ -20,7 +20,7 @@ Component({
   methods: {
     changeTabs(e) {
       // const {activeKey, currentIndex} = e.detail
-      this.triggerEvent('changeTabs', e.detail)
+      this.triggerEvent('change-tabs', e.detail)
     },
     onProduct(e) {
       const { id } = e.currentTarget.dataset

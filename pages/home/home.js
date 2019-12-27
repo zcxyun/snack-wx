@@ -55,7 +55,7 @@ Component({
     onThemeClick(e) {
       const {id} = e.detail
       wx.navigateTo({
-        url: `/pages/products/products?type=theme&id=${id}`
+        url: `/pages/products-h/products-h?id=${id}`
       })
     },
 

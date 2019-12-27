@@ -4,14 +4,18 @@ Component({
    * 组件的属性列表
    */
   properties: {
+    cartTotalCount: Number,
     product: Object,
+    showOptionPanel: {
+      type: Boolean,
+      value: false,
+    }
   },
 
   /**
    * 组件的初始数据
    */
   data: {
-    showOptionPanel: false,
     cartCount: 1,
     optionType: '',
     maxCount: 10,
@@ -51,9 +55,7 @@ Component({
     },
     onCounter(e) {
       const { count } = e.detail
-      this.setData({
-        cartCount: count,
-      })
+      this.data.cartCount = count
     },
     onCounterOverflow(e) {
       const { type } = e.detail

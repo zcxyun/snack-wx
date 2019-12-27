@@ -1,0 +1,43 @@
+<view class="container">
+  <l-segment
+    bind:linchange="changeTabs"
+    scrollable
+    width="160"
+    height="1200"
+    item-height="80"
+    placement="left"
+    animated-for-line
+    l-class="left-bar"
+  >
+    <l-segment-item
+      wx:for="{{data}}"
+      wx:key="id"
+      wx:for-item="category"
+      tab="{{category.name}}"
+      key="{{category.id}}"
+    />
+  </l-segment>
+  <view class="content-container" wx:for="{{data}}" wx:key="id" wx:for-item="category"
+    hidden="{{index !== currentTab}}">
+    <image class="header-img" src="{{category.image}}" />
+    <view class="title-box">
+      <view class="title-line"></view>
+      <text class="title">{{category.name}}</text>
+      <view class="title-line"></view>
+    </view>
+    <view class="products">
+      <block wx:for="{{category.products}}" wx:for-item="product" wx:key="id">
+        <view class="product" bind:tap="onProduct" data-id="{{product.id}}">
+          <image class="product-img" src="{{product.image}}" />
+          <text class="product-name">{{product.name}}</text>
+        </view>
+      </block>
+    </view>
+    <view class="more">
+      <text bind:tap="onMore" data-id="{{category.id}}">
+        更多
+        <l-icon name="more" />
+      </text>
+    </view>
+  </view>
+</view>

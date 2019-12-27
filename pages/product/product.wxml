@@ -45,6 +45,8 @@
 </view>
 <z-product-foot-bar
   product="{{product}}"
+  showOptionPanel="{{showOptionPanel}}"
+  cartTotalCount="{{cartTotalCount}}"
   bind:to-home="onTapHome"
   bind:to-cart="onTapCart"
   bind:add-to-cart="onAddToCart"

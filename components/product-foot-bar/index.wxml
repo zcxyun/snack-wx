@@ -2,11 +2,13 @@
   <view class="foot-bar-container" wx:if="{{!showOptionPanel}}">
     <view class="home-cart-box">
       <view class="home-box center" bind:tap="onHome">
-        <l-icon name="setting" />
+        <l-icon name="like" size="34" />
         <text>首页</text>
       </view>
       <view class="cart-box center" bind:tap="onCart">
-        <l-icon name="cart"></l-icon>
+        <l-badge show="{{cartTotalCount}}" value="{{cartTotalCount}}">
+          <l-icon name="cart" size="40" />
+        </l-badge>
         <text>购物车</text>
       </view>
     </view>

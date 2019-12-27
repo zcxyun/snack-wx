@@ -1,3 +1,4 @@
+// 日期相关
 const formatTime = date => {
   const year = date.getFullYear()
   const month = date.getMonth() + 1
@@ -14,9 +15,74 @@ const formatNumber = n => {
   return n[1] ? n : '0' + n
 }
 
-/**
- * 回调函数 promise 化
- */
+// 判断类型
+function type(obj) {
+  const { toString } = Object.prototype
+  const map = {
+    '[object Boolean]': 'boolean',
+    '[object Number]': 'number',
+    '[object String]': 'string',
+    '[object Function]': 'function',
+    '[object Array]': 'array',
+    '[object Date]': 'date',
+    '[object RegExp]': 'regExp',
+    '[object Undefined]': 'undefined',
+    '[object Null]': 'null',
+    '[object Object]': 'object',
+  }
+  return map[toString.call(obj)]
+}
+
+// 数字相关
+// 保留指定位数的小数(四舍五入)
+const zround = (n, decimals = 0) => {
+  return Number(`${Math.round(`${n}e${decimals}`)}e-${decimals}`)
+}
+
+// 小数位补0(货币)
+const num2money = (num, count = 2) => {
+  if (typeof num !== 'number') {
+    console.error('要补0的值不是有效数字')
+    return
+  }
+  let numArr = zround(num, 2).toString().split('.')
+  if (numArr.length === 1) {
+    return numArr[0] + '.00'
+  }
+  if (numArr.length === 2) {
+    let [i, d] = numArr
+    if (d.length === 0) {
+      return i + '.00'
+    }
+    if (d.length === 1) {
+      return i + '.' + d + '0'
+    }
+    if (d.length === 2) {
+      return i + '.' + d
+    }
+  }
+  if (numArr.length > 2) {
+    console.error('要补0的值不是有效数字')
+    return
+  }
+}
+
+// 判断一个两个数组的内容是否一样(数组元素为对象))
+const isArrEqual = function (oArr, dArr) {
+  if (Array.isArray(oArr) && Array.isArray(dArr)) {
+    return oArr.every((item, index) => {
+      const { toString } = Object.prototype
+      const objDes = '[object Object]'
+      if (toString.call(item) !== objDes || toString.call(dArr[index]) !== objDes) {
+        return false
+      }
+      return Object.keys(item).every(key => item[key] === dArr[index][key])
+    })
+  }
+  return false
+}
+
+// 回调函数 promise 化
 const promisic = function (func) {
   return function ({...args}={}) {
     return new Promise((resolve, reject) => {
@@ -33,6 +99,7 @@ const promisic = function (func) {
   }
 }
 
+// 登录相关
 const accessTokenKey = 'accessToken'
 const refreshTokenKey = 'refreshToken'
 const loginStatusKey = 'loginStatus'
@@ -58,7 +125,10 @@ const getLoginStatusOfStorage = function() {
 }
 
 export {
+  isArrEqual,
   formatTime,
+  zround,
+  num2money,
   promisic,
   setTokensToStorage,
   getAccessTokenFromStorage,

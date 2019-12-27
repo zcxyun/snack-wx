@@ -83,6 +83,27 @@
 					"pathName": "pages/product/product",
 					"query": "id=1",
 					"scene": null
+				},
+				{
+					"id": 4,
+					"name": "pages/products/products",
+					"pathName": "pages/products/products",
+					"query": "id=5&type=category",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/products-h/products-h",
+					"pathName": "pages/products-h/products-h",
+					"query": "id=5",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/cart/cart",
+					"pathName": "pages/cart/cart",
+					"query": "",
+					"scene": null
 				}
 			]
 		}

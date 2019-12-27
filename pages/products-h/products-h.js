@@ -1,7 +1,6 @@
-// pages/products/products.js
 import productModel from "../../models/product.js";
 import paginate from '../../behaviors/paginate.js'
-import categoryModel from "../../models/category.js";
+import themeModel from '../../models/theme.js'
 
 Component({
   behaviors: [paginate],
@@ -24,23 +23,22 @@ Component({
       this.init()
     },
 
-    async init () {
+    async init() {
       this._loading(true)
       const id = this.properties.id
-      const productsPromise = productModel.getPaginateByCategory(id)
-      const categoryPromise = categoryModel.get(id)
+      const productsPromise = productModel.getPaginateByTheme(id)
+      const themePromise = themeModel.get(id)
       const res = await productsPromise
       if (res) {
         this._setMoreData(res.models)
         this._setTotal(res.total)
-        wx.lin.renderWaterFlow(res.models, false)
       } else {
         this._setNoResult(true)
       }
-      const category = await categoryPromise
-      if (category) {
+      const theme = await themePromise
+      if (theme) {
         this.setData({
-          headerImg: category.image
+          headerImg: theme.head_img
         })
       }
       this._loading(false)
@@ -98,10 +96,9 @@ Component({
         this._lock(true)
         const id = this.properties.id
         const start = this._getCurrentStart()
-        const res = await productModel.getPaginateByCategory(id, start)
+        const res = await productModel.getPaginateByTheme(id, start)
         if (res && res.models) {
           this._setMoreData(res.models)
-          wx.lin.renderWaterFlow(res.models, false)
         }
         this._lock(false)
       } else {
@@ -115,5 +112,5 @@ Component({
     onShareAppMessage: function () {
 
     }
-  }
+  },
 })

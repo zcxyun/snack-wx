@@ -1,0 +1,7 @@
+{
+  "component": true,
+  "usingComponents": {
+    "l-card": "/dist/card/index",
+    "l-price": "/dist/price/index"
+  }
+}

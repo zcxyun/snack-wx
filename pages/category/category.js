@@ -51,7 +51,7 @@ Page({
   onTapMore(e) {
     const { id } = e.detail
     wx.navigateTo({
-      url: `/pages/products/products?type=category&id=${id}`
+      url: `/pages/products/products?id=${id}`
     })
   },
 

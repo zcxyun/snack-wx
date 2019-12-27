@@ -1,0 +1,35 @@
+.l-card-container {
+  box-shadow: 0rpx 0rpx 20rpx 0rpx rgba(9, 36, 66, 0.1) !important;
+  margin-bottom: 20rpx;
+}
+
+.l-card-img {
+  width: 250rpx !important;
+  height: 250rpx !important;
+}
+
+.l-card-title {
+  margin-top: 30rpx !important;
+  font-size: 28rpx;
+  font-weight: 600;
+}
+
+.summary {
+  font-size: 24rpx;
+  color: #777;
+  margin-top: 15rpx;
+  width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.price-container {
+  margin: 15rpx 0;
+  height: 30rpx;
+  width: 100%;
+}
+
+.price {
+  margin-right: 30rpx;
+}

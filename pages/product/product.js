@@ -1,6 +1,7 @@
 import productModel from "../../models/product.js";
 import commentModel from "../../models/comment.js"
 import likeModel from "../../models/like.js"
+import cartModel from "../../models/cart.js"
 
 Component({
 
@@ -10,11 +11,17 @@ Component({
 
   data: {
     product: null,
+    cartTotalCount: 0,
+    // 评论相关
     comments: [],
     tapComments: [],
+    // 点赞相关
     likeStatus: false,
     likeCount: 0,
     loading: false,
+    // 底部工具栏
+    showOptionPanel: false, // 是否显示详细选项
+    // tab 相关
     currentTab: 'detail',
     tabs: [{
       tab: '商品详情',
@@ -40,16 +47,22 @@ Component({
     async init() {
       this._loading(true)
       const id = this.properties.id
+
+      const cartTotalCountPromise = cartModel.getTotalCount()
       const productPromise = productModel.get(id)
       const commentsPromise = commentModel.getByProduct(id)
       const likePromise = likeModel.getFavor(id)
+
+      const cartTotalCount = await cartTotalCountPromise
       const product = await productPromise
       const comments = await commentsPromise
       const like = await likePromise
+
       if (product.desc_imgs && Array.isArray(product.desc_imgs)) {
         product.desc_imgs.sort((a, b) => a.order - b.order)
       }
       this.setData({
+        cartTotalCount: cartTotalCount.total_count,
         product,
         comments,
         tapComments: comments.slice(0, 3),
@@ -85,9 +98,15 @@ Component({
       })
     },
 
-    onAddToCart(e) {
+    async onAddToCart(e) {
       const { id, count } = e.detail
-      console.log(id, count)
+      const res = await cartModel.edit(id, count)
+      if (res && res.msg) {
+        this._showToast(res.msg)
+        this._showOptionPanel(false)
+        const cartTotalCount = await cartModel.getTotalCount()
+        this.setData({cartTotalCount: cartTotalCount.total_count})
+      }
     },
 
     onNowBuy(e) {
@@ -128,6 +147,10 @@ Component({
 
     _loading(loading) {
       this.setData({loading})
+    },
+
+    _showOptionPanel(showOptionPanel) {
+      this.setData({showOptionPanel})
     },
 
     _showToast(msg) {

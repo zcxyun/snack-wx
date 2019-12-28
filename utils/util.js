@@ -70,6 +70,9 @@ const num2money = (num, count = 2) => {
 // 判断一个两个数组的内容是否一样(数组元素为对象))
 const isArrEqual = function (oArr, dArr) {
   if (Array.isArray(oArr) && Array.isArray(dArr)) {
+    if (oArr.length !== dArr.length) {
+      return false
+    }
     return oArr.every((item, index) => {
       const { toString } = Object.prototype
       const objDes = '[object Object]'

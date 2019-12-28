@@ -1,27 +1,42 @@
 <!--pages/cart/cart.wxml-->
 <view class="cart-container">
-  <view class="product-box" wx:for="{{products}}" wx:key="id" wx:for-item="product">
-    <image
-      class="select-img" src="{{product.selected ? selectedImg : noSelectedImg}}"
-      bind:tap="onSelect" data-id="{{product.id}}" />
-    <image class="product-img" src="{{product.image}}" />
-    <view class="product-detail">
-      <text class="name">{{product.name}}</text>
-      <view class="detail-foot">
-        <l-price l-class="price" value="{{product.price_str}}"
-          color="#F56C6C" size="30" bold="600"></l-price>
-        <l-counter
-          l-class="counter"
-          max="{{maxCount}}"
-          count="{{product.count}}"
-          disabled="{{!product.selected}}"
-          data-id="{{product.id}}"
-          bind:lintap="onCounter"
-          bind:linout="onCounterOverflow" />
-      </view>
-    </view>
+  <l-loading show="{{loading}}" full-screen="{{true}}" />
+  <l-status-show show="{{products.length === 0}}" type="cart" bind:lintap="goShopping" />
+  <view class="head-bar" wx:if="{{products.length > 0}}">
+    <text bind:tap="removeNoSelected">删除未选中</text>
+    <text bind:tap="clear">清空</text>
   </view>
-  <view class="foot-bar">
+  <view style="height: 80rpx"></view>
+  <block wx:for="{{products}}" wx:key="id" wx:for-item="product" wx:if="{{products.length > 0}}">
+    <l-slide-view height="200" width="750" slide-width="150"
+      close="{{product.slideClose}}" bind:slideopen="slideopen" data-id="{{product.id}}">
+      <view class="product-box" slot="left">
+        <image
+          class="select-img" src="{{product.selected ? selectedImg : noSelectedImg}}"
+          bind:tap="onSelect" data-id="{{product.id}}" />
+        <image class="product-img" src="{{product.image}}" />
+        <view class="product-detail">
+          <text class="name">{{product.name}}</text>
+          <view class="detail-foot">
+            <l-price l-class="price" value="{{product.price_str}}"
+              color="#F56C6C" size="30" bold="600"></l-price>
+            <l-counter
+              l-class="counter"
+              max="{{maxCount}}"
+              count="{{product.count}}"
+              disabled="{{!product.selected}}"
+              data-id="{{product.id}}"
+              bind:lintap="onCounter"
+              bind:linout="onCounterOverflow" />
+          </view>
+        </view>
+      </view>
+      <view slot="right" class="slide-right" bind:tap="deleteItem" data-id="{{product.id}}">
+        <text>删除</text>
+      </view>
+    </l-slide-view>
+  </block>
+  <view class="foot-bar" wx:if="{{products.length > 0}}">
     <view class="settlement-info">
       <view class="all-select-box">
         <image class="select-img" src="{{allSelected ? selectedImg : noSelectedImg}}"

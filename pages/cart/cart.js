@@ -4,7 +4,7 @@ import cartModel from '../../models/cart.js'
 Component({
 
   properties: {
-    // products: Array,
+
   },
 
   /**
@@ -17,22 +17,8 @@ Component({
     allSelected: true,
     totalCount: 0,
     totalPrice: '0.00',
-    // products: [{
-    //   id: 1,
-    //   name: 'zcx',
-    //   price_str: '1.12',
-    //   count: 2,
-    //   image: "http://127.0.0.1:5000/assets/2019/11/15/4f1311ac-075b-11ea-a447-3c15c2c48de4.png",
-    //   selected: true,
-    // }, {
-    //   id: 2,
-    //   name: 'zcx',
-    //   price_str: '1.12',
-    //   count: 2,
-    //   image: "http://127.0.0.1:5000/assets/2019/11/15/4f1311ac-075b-11ea-a447-3c15c2c48de4.png",
-    //   selected: true,
-    // }],
     products: [],
+    loading: false,
   },
 
   methods: {
@@ -46,10 +32,14 @@ Component({
 
     async init() {
       const products = await cartModel.getProducts()
-      if (products) {
+      products.forEach((product) => {
+        product.slideClose = true
+      })
+      if (Array.isArray(products) && products.length > 0) {
         this.data.products = products
         const { totalPrice, totalCount } = this._recount()
-        this.setData({ totalPrice, totalCount, products })
+        const allSelected = products.every((item) => item.selected)
+        this.setData({ totalPrice, totalCount, products, allSelected })
       }
     },
 
@@ -113,11 +103,85 @@ Component({
       }
     },
 
+    goShopping() {
+      wx.switchTab({url: '/pages/home/home'})
+    },
+
+    async removeNoSelected() {
+      if (this.data.loading) {
+        return
+      }
+      this._loading(true)
+      const products = this.data.products.filter((item) => item.selected)
+      const res = await cartModel.editAll(products)
+      if (res) {
+        // this._showToast('未选中项已删除')
+        this.setData({products, allSelected: true})
+      }
+      this._loading(false)
+    },
+
+    async clear() {
+      if (this.data.loading) {
+        return
+      }
+      this._loading(true)
+      const res = await cartModel.clear()
+      if (res && res.msg) {
+        this._showToast(res.msg)
+        this.setData({products: []})
+      }
+      this._loading(false)
+    },
+
+    async deleteItem(e) {
+      if (this.data.loading) {
+        return
+      }
+      this._loading(true)
+      const { id } = e.currentTarget.dataset
+      const products = this.data.products.filter((item) => item.id !== id)
+      let res = null
+      if (products.length > 0) {
+        res = await cartModel.editAll(products)
+        if (res) {
+          const allSelected = products.every((item) => item.selected)
+          this.data.products = products
+          const { totalPrice, totalCount } = this._recount()
+          this.setData({products, allSelected, totalPrice, totalCount})
+        }
+      } else {
+        res = await cartModel.clear()
+        if (res && res.msg) {
+          this._showToast(res.msg)
+          this.setData({ products: [] })
+        }
+      }
+      this._loading(false)
+    },
+
+    slideopen(e) {
+      const { id } = e.currentTarget.dataset
+      const products = this.data.products
+      products.forEach((product) => {
+        if (product.id === id) {
+          product.slideClose = false
+        } else {
+          product.slideClose = true
+        }
+      })
+      this.setData({products})
+    },
+
     _showToast(text) {
       wx.showToast({
         title: text,
         icon: 'none',
       })
+    },
+
+    _loading(loading) {
+      this.setData({loading})
     },
 
     /**

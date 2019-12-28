@@ -1,6 +1,9 @@
 {
   "usingComponents": {
     "l-price": "/dist/price/index",
-    "l-counter": "/dist/counter/index"
+    "l-counter": "/dist/counter/index",
+    "l-status-show": "/dist/status-show/index",
+    "l-slide-view": "/dist/slide-view/index",
+    "l-loading": "/dist/loading/index"
   }
 }

@@ -1,6 +1,5 @@
 import Http from '../utils/http.js'
 import { isArrEqual } from "../utils/util.js";
-const app = getApp()
 
 class Cart extends Http {
   cartKey = 'cart'
@@ -37,21 +36,6 @@ class Cart extends Http {
     if (res) {
       this.setNoRefreshCartStorage(false)
     }
-    // if (res) {
-    //   const cart = this.getCartOfStorage()
-    //   if (cart) {
-    //     const index = cart.findIndex(item => item.id === res.id)
-    //     if (index !== -1) {
-    //       cart[index].count = res.count
-    //       cart[index].selected = res.selected
-    //     } else {
-    //       cart.push(res)
-    //     }
-    //     this.setCartToStorage(cart)
-    //   } else {
-    //     this.setCartToStorage([res])
-    //   }
-    // }
     return res
   }
 
@@ -83,6 +67,17 @@ class Cart extends Http {
     return res
   }
 
+  async clear() {
+    const res = await this.request({
+      url: 'cart',
+      method: 'DELETE'
+    })
+    if (res) {
+      this.setCartToStorage([])
+    }
+    return res
+  }
+
   getNoRefreshCartStorage() {
     return wx.getStorageSync(this.noRefreshCartStorageKey)
   }
@@ -99,13 +94,6 @@ class Cart extends Http {
   getCartOfStorage() {
     return wx.getStorageSync(this.cartKey)
   }
-  // clear() {
-  //   this.request({
-  //     url: 'cart',
-  //     method: 'DELETE'
-  //   })
-  // }
-
 }
 
 export default new Cart()

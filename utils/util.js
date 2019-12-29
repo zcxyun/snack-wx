@@ -85,6 +85,14 @@ const isArrEqual = function (oArr, dArr) {
   return false
 }
 
+const isEmptyArray = function (arr) {
+  return Array.isArray(arr) && arr.length === 0
+}
+
+const isNotEmptyArray = function (arr) {
+  return Array.isArray(arr) && arr.length > 0
+}
+
 // 回调函数 promise 化
 const promisic = function (func) {
   return function ({...args}={}) {
@@ -129,6 +137,8 @@ const getLoginStatusOfStorage = function() {
 
 export {
   isArrEqual,
+  isEmptyArray,
+  isNotEmptyArray,
   formatTime,
   zround,
   num2money,

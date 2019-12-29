@@ -49,6 +49,6 @@
           color="#F56C6C" size="30" bold="600"></l-price>
       </view>
     </view>
-    <view class="settlement-btn">结算({{totalCount}})</view>
+    <view class="settlement-btn" bind:tap="settleAccount">结算({{totalCount}})</view>
   </view>
 </view>

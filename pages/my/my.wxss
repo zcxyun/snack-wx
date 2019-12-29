@@ -3,7 +3,9 @@
   height: 150rpx;
   width: 100%;
   box-sizing: border-box;
-  padding: 20rpx 40rpx;
+  display: flex;
+  align-items: center;
+  padding-left: 40rpx;
 }
 
 .avatar-text {

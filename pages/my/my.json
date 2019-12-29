@@ -3,6 +3,8 @@
     "l-button": "/dist/button/index",
     "l-loadmore": "/dist/loadmore/index",
     "l-list": "/dist/list/index",
-    "l-avatar": "/dist/avatar/index"
+    "l-avatar": "/dist/avatar/index",
+    "l-popup": "/dist/popup/index",
+    "l-dialog": "/dist/dialog/index"
   }
 }

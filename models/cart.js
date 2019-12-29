@@ -4,6 +4,7 @@ import { isArrEqual } from "../utils/util.js";
 class Cart extends Http {
   cartKey = 'cart'
   noRefreshCartStorageKey = 'noRefreshCartStorage'
+  canSettleKey = 'canSettle'
 
   async getProducts() {
     let cart = null
@@ -41,12 +42,12 @@ class Cart extends Http {
 
   async editAll(data) {
     if (!Array.isArray(data)) {
-      return
+      return false
     }
     let cart = this.getCartOfStorage()
     if (cart) {
       if (isArrEqual(data, cart)) {
-        return
+        return true
       }
     }
     const defineData = data.map((item) => {
@@ -84,16 +85,32 @@ class Cart extends Http {
 
   setNoRefreshCartStorage(refresh) {
     wx.setStorageSync(this.noRefreshCartStorageKey, refresh)
+    // wx.setStorage({
+    //   key: this.noRefreshCartStorageKey,
+    //   data: refresh,
+    // })
   }
-
 
   setCartToStorage(cart) {
     wx.setStorageSync(this.cartKey, cart)
+    // wx.setStorage({
+    //   key: this.cartKey,
+    //   data: cart,
+    // })
   }
 
   getCartOfStorage() {
     return wx.getStorageSync(this.cartKey)
   }
+
+  getCanSettleAccount() {
+    return wx.getStorageSync(this.canSettleKey)
+  }
+
+  setCanSettleAccount(can) {
+    wx.setStorageSync(this.canSettleKey, can)
+  }
+
 }
 
 export default new Cart()

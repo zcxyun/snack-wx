@@ -1,4 +1,4 @@
-import { num2money } from '../../utils/util.js'
+import { num2money, isEmptyArray, isNotEmptyArray } from '../../utils/util.js'
 import cartModel from '../../models/cart.js'
 
 Component({
@@ -19,6 +19,7 @@ Component({
     totalPrice: '0.00',
     products: [],
     loading: false,
+    toSettle: false,
   },
 
   methods: {
@@ -32,30 +33,28 @@ Component({
 
     async init() {
       const products = await cartModel.getProducts()
-      products.forEach((product) => {
-        product.slideClose = true
-      })
-      if (Array.isArray(products) && products.length > 0) {
+      products.forEach((product) => { product.slideClose = true })
+      if (isNotEmptyArray(products)) {
         this.data.products = products
-        const { totalPrice, totalCount } = this._recount()
-        const allSelected = products.every((item) => item.selected)
-        this.setData({ totalPrice, totalCount, products, allSelected })
+        this._recount()
       }
     },
 
     _recount() {
       let products = this.data.products
-      if (products.length === 0) {
+      if (isEmptyArray(products)) {
+        this.setData({ products })
         return
       }
-      products = products.filter((item) => item.selected)
-      const totalCount = products.reduce((a, b) => {return a + b.count}, 0)
-      let totalPrice = products.reduce((a, b) => {
+      const allSelected = products.every((item) => item.selected)
+      const productsOfRecount = products.filter((item) => item.selected)
+      const totalCount = productsOfRecount.reduce((a, b) => a + b.count, 0)
+      let totalPrice = productsOfRecount.reduce((a, b) => {
         const bTotalPrice = parseFloat(b.price_str) * b.count
         return  a + bTotalPrice
       }, 0)
       totalPrice = num2money(totalPrice)
-      return { totalCount, totalPrice }
+      this.setData({ products, allSelected, totalPrice, totalCount })
     },
 
     onSelect(e) {
@@ -63,21 +62,17 @@ Component({
       const { id } = e.currentTarget.dataset
       const product = products.find((item) => item.id === id)
       product.selected = !product.selected
-      const allSelected = products.every((item) => item.selected)
-      const { totalPrice, totalCount } = this._recount()
-      this.setData({ products, allSelected, totalPrice, totalCount })
+      this._recount()
     },
 
     onAllSelect() {
       const allSelected = !this.data.allSelected
-      const products = this.data.products
       if (allSelected) {
-        products.forEach(item => item.selected = true )
+        this.data.products.forEach(item => item.selected = true )
       } else {
-        products.forEach((item) => item.selected = false)
+        this.data.products.forEach((item) => item.selected = false)
       }
-      const { totalPrice, totalCount } = this._recount()
-      this.setData({ products, allSelected, totalCount, totalPrice })
+      this._recount()
     },
 
     onCounter(e) {
@@ -85,8 +80,7 @@ Component({
       const { id } = e.currentTarget.dataset
       const product = this.data.products.find((item) => item.id === id)
       product.count = count
-      const { totalPrice, totalCount } = this._recount()
-      this.setData({ totalCount, totalPrice })
+      this._recount()
     },
 
     onCounterOverflow(e) {
@@ -103,10 +97,6 @@ Component({
       }
     },
 
-    goShopping() {
-      wx.switchTab({url: '/pages/home/home'})
-    },
-
     async removeNoSelected() {
       if (this.data.loading) {
         return
@@ -115,7 +105,6 @@ Component({
       const products = this.data.products.filter((item) => item.selected)
       const res = await cartModel.editAll(products)
       if (res) {
-        // this._showToast('未选中项已删除')
         this.setData({products, allSelected: true})
       }
       this._loading(false)
@@ -141,21 +130,10 @@ Component({
       this._loading(true)
       const { id } = e.currentTarget.dataset
       const products = this.data.products.filter((item) => item.id !== id)
-      let res = null
-      if (products.length > 0) {
-        res = await cartModel.editAll(products)
-        if (res) {
-          const allSelected = products.every((item) => item.selected)
-          this.data.products = products
-          const { totalPrice, totalCount } = this._recount()
-          this.setData({products, allSelected, totalPrice, totalCount})
-        }
-      } else {
-        res = await cartModel.clear()
-        if (res && res.msg) {
-          this._showToast(res.msg)
-          this.setData({ products: [] })
-        }
+      const res = await cartModel.editAll(products)
+      if (res) {
+        this.data.products = products
+        this._recount()
       }
       this._loading(false)
     },
@@ -171,6 +149,19 @@ Component({
         }
       })
       this.setData({products})
+    },
+
+    async settleAccount() {
+      const res = await cartModel.editAll(this.data.products)
+      if (res) {
+        wx.navigateTo({
+          url: '/pages/pre-order/pre-order'
+        })
+      }
+    },
+
+    goShopping() {
+      wx.switchTab({ url: '/pages/home/home' })
     },
 
     _showToast(text) {
@@ -202,7 +193,7 @@ Component({
      * 生命周期函数--监听页面隐藏
      */
     async onHide() {
-      cartModel.editAll(this.data.products)
+      await cartModel.editAll(this.data.products)
     },
 
     /**

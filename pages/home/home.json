@@ -1,4 +1,5 @@
 {
+  "component": true,
   "usingComponents": {
     "z-search-bar": "/components/search-bar/index",
     "z-banner": "/components/banner/index",

@@ -1,0 +1,3 @@
+<view class="container">
+  <!-- <l-status-show show="{{showNetworkError}}" type="network" button-text="返回" bind:lintap="back" /> -->
+</view>

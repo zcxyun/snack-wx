@@ -7,8 +7,8 @@ class Comment extends Http {
     })
   }
 
-  add(product_id, content) {
-    return this.request({
+  async add(product_id, content) {
+    const res = this.request({
       url: `comment`,
       method: 'POST',
       data: {
@@ -16,6 +16,10 @@ class Comment extends Http {
         content,
       }
     })
+    if (res === this.authFail) {
+      return this.dealAuthFail()
+    }
+    return res
   }
 }
 

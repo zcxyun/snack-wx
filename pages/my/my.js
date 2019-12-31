@@ -3,7 +3,6 @@ import {
   getLoginStatusOfStorage,
   setLoginStatusToStorage
 } from "../../utils/util.js"
-import tokenModel from '../../models/token.js'
 import memberModel from '../../models/member.js'
 
 Component({
@@ -12,15 +11,14 @@ Component({
    */
   data: {
     authorized: false,
-    userInfo: null,
-    showSettingBtn: false,
+    memberInfo: null,
     showSettingDialog: false,
   },
   methods: {
     /**
      * 生命周期函数--监听页面加载
      */
-    onLoad: function (options) {
+    onLoad: function () {
     },
 
     async userAuthorized() {
@@ -28,20 +26,17 @@ Component({
         const res = await promisic(wx.getSetting)()
         if (res.authSetting['scope.userInfo']) {
           let loginStatus = false
-          let {userInfo} = await promisic(wx.getUserInfo)()
+          let { userInfo } = await promisic(wx.getUserInfo)()
           // 启动时检测更新后端头像
           const memberInfo = await memberModel.getInfo()
           if (memberInfo instanceof Object) {
-            const isNotSame = this.equalInfo(memberInfo, userInfo)
-            if (isNotSame) {
-              await memberModel.updateInfo(userInfo)
-            }
+            memberModel.updateInfo(memberInfo, userInfo)
             loginStatus = true
           } else {
-            userInfo = {}
+            memberInfo = {}
           }
           this.setData({
-            userInfo,
+            memberInfo,
             authorized: loginStatus
           })
         }
@@ -50,32 +45,7 @@ Component({
       }
     },
 
-    equalInfo(memberInfo, userInfo) {
-      const res = Object.keys(memberInfo).some(key => memberInfo[key] !== userInfo[key])
-      return res
-    },
 
-    async onGetUserInfo(e) {
-      try {
-        const userInfo = e.detail.userInfo
-        if (userInfo) {
-          const { code } = await promisic(wx.login)()
-          if (code) {
-            const res = await tokenModel.getTokens({ code, ...userInfo })
-            if (res) {
-              this.setData({
-                userInfo,
-                authorized: true
-              })
-              setLoginStatusToStorage(true)
-              // this.getMyFavorCount()
-            }
-          }
-        }
-      } catch (error) {
-        console.log(error)
-      }
-    },
 
     onOrder() {
 
@@ -90,15 +60,23 @@ Component({
       })
     },
 
+    login() {
+      wx.navigateTo({
+        url: '/pages/login/login'
+      })
+    },
+
     async onConfirm() {
       this.setData({showSettingDialog: false})
       wx.openSetting()
     },
 
-    onComment() {
-
+    _showToast(text) {
+      wx.showToast({
+        title: text,
+        icon: 'none',
+      })
     },
-
     /**
      * 生命周期函数--监听页面初次渲染完成
      */
@@ -138,25 +116,8 @@ Component({
      * 页面上拉触底事件的处理函数
      */
     onReachBottom: function () {
-      // this.loadMore()
-    },
 
-    // async loadMore() {
-    //   if(this._isLocked()) {
-    //     return
-    //   }
-    //   if (this._hasMore()) {
-    //     this._lock(true)
-    //     const moreData = await classicModel.getMyFavor(this._getCurrentStart())
-    //     if(moreData && moreData.models) {
-    //       // this._setTotal(moreData.total)
-    //       this._setMoreData(moreData.models)
-    //     }
-    //     this._lock(false)
-    //   } else {
-    //     this._noMoreData()
-    //   }
-    // },
+    },
 
     /**
      * 用户点击右上角分享

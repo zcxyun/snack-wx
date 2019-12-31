@@ -1,4 +1,5 @@
 {
+  "component": true,
   "usingComponents": {
     "l-loading": "/dist/loading/index",
     "l-loadmore": "/dist/loadmore/index",

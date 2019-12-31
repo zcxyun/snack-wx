@@ -48,7 +48,7 @@ Component({
       this._loading(true)
       const id = this.properties.id
 
-      const cartTotalCountPromise = cartModel.getTotalCount()
+      const cartTotalCountPromise =  cartModel.getTotalCount()
       const productPromise = productModel.get(id)
       const commentsPromise = commentModel.getByProduct(id)
       const likePromise = likeModel.getFavor(id)
@@ -62,12 +62,12 @@ Component({
         product.desc_imgs.sort((a, b) => a.order - b.order)
       }
       this.setData({
-        cartTotalCount: cartTotalCount.total_count,
-        product,
-        comments,
-        tapComments: comments.slice(0, 3),
-        likeStatus: like.like_status,
-        likeCount: like.like_count,
+        cartTotalCount: cartTotalCount ? cartTotalCount.total_count : 0,
+        product: product || {},
+        comments: comments || [],
+        tapComments: comments ? comments.slice(0, 3) : [],
+        likeStatus: like ? like.like_status : false,
+        likeCount: like ? like.like_count : 0,
       })
       this._loading(false)
     },

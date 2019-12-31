@@ -1,31 +1,37 @@
 import Http from '../utils/http.js'
 import { isArrEqual } from "../utils/util.js";
+const app = getApp()
 
 class Cart extends Http {
   cartKey = 'cart'
-  noRefreshCartStorageKey = 'noRefreshCartStorage'
-  canSettleKey = 'canSettle'
 
   async getProducts() {
     let cart = null
-    if (this.getNoRefreshCartStorage()) {
+    if (!app.state.refreshCartStorage) {
       cart = this.getCartOfStorage()
       if (cart) {
         return cart
       }
     }
     cart = await this.request({ url: 'cart/products' })
+    if (cart === this.authFail) {
+      return this.dealAuthFail()
+    }
     if (cart) {
       this.setCartToStorage(cart)
-      this.setNoRefreshCartStorage(true)
+      app.state.refreshCartStorage = false
       return cart
     }
   }
 
-  getTotalCount() {
-    return this.request({
+  async getTotalCount() {
+    const res = await this.request({
       url: 'cart/products/count'
     })
+    if (res === this.authFail) {
+      return 0
+    }
+    return res
   }
 
   async edit(product_id, count, selected = true) {
@@ -34,8 +40,11 @@ class Cart extends Http {
       method: 'POST',
       data: { product_id, count, selected }
     })
+    if (res === this.authFail) {
+      return this.dealAuthFail()
+    }
     if (res) {
-      this.setNoRefreshCartStorage(false)
+      app.state.refreshCartStorage = true
     }
     return res
   }
@@ -44,6 +53,7 @@ class Cart extends Http {
     if (!Array.isArray(data)) {
       return false
     }
+    data.forEach((item) => { delete item.slideClose })
     let cart = this.getCartOfStorage()
     if (cart) {
       if (isArrEqual(data, cart)) {
@@ -62,6 +72,9 @@ class Cart extends Http {
       method: 'POST',
       data: defineData,
     })
+    if (res === this.authFail) {
+      return this.dealAuthFail()
+    }
     if (res) {
       this.setCartToStorage(data)
     }
@@ -73,44 +86,22 @@ class Cart extends Http {
       url: 'cart',
       method: 'DELETE'
     })
+    if (res === this.authFail) {
+      return this.dealAuthFail()
+    }
     if (res) {
       this.setCartToStorage([])
     }
     return res
   }
 
-  getNoRefreshCartStorage() {
-    return wx.getStorageSync(this.noRefreshCartStorageKey)
-  }
-
-  setNoRefreshCartStorage(refresh) {
-    wx.setStorageSync(this.noRefreshCartStorageKey, refresh)
-    // wx.setStorage({
-    //   key: this.noRefreshCartStorageKey,
-    //   data: refresh,
-    // })
-  }
-
   setCartToStorage(cart) {
     wx.setStorageSync(this.cartKey, cart)
-    // wx.setStorage({
-    //   key: this.cartKey,
-    //   data: cart,
-    // })
   }
 
   getCartOfStorage() {
     return wx.getStorageSync(this.cartKey)
   }
-
-  getCanSettleAccount() {
-    return wx.getStorageSync(this.canSettleKey)
-  }
-
-  setCanSettleAccount(can) {
-    wx.setStorageSync(this.canSettleKey, can)
-  }
-
 }
 
 export default new Cart()

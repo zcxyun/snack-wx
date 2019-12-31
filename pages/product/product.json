@@ -1,4 +1,5 @@
 {
+  "component": true,
   "usingComponents": {
     "z-product-foot-bar": "/components/product-foot-bar/index",
     "z-short-comment": "/components/short-comment/index",

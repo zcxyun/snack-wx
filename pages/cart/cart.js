@@ -19,7 +19,6 @@ Component({
     totalPrice: '0.00',
     products: [],
     loading: false,
-    toSettle: false,
   },
 
   methods: {
@@ -33,8 +32,8 @@ Component({
 
     async init() {
       const products = await cartModel.getProducts()
-      products.forEach((product) => { product.slideClose = true })
       if (isNotEmptyArray(products)) {
+        products.forEach((product) => { product.slideClose = true })
         this.data.products = products
         this._recount()
       }
@@ -193,7 +192,7 @@ Component({
      * 生命周期函数--监听页面隐藏
      */
     async onHide() {
-      await cartModel.editAll(this.data.products)
+      cartModel.editAll(this.data.products)
     },
 
     /**

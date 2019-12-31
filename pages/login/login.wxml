@@ -1,0 +1,6 @@
+<view class="popup-box">
+  <text>登录</text>
+  <l-button type="success" bind:getuserinfo="getUserInfo" open-type="getUserInfo" width="500" height="120">
+    <text class="popup-login-text">微信一键登录</text>
+  </l-button>
+</view>

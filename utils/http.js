@@ -7,6 +7,8 @@ import {
 } from '../utils/util.js'
 
 export default class Http {
+  authFail = Symbol('authFail')
+
   async request({url, method='GET', data={}, refetch=true}) {
     const that = this
     const header = this.getHeader(url)
@@ -14,7 +16,7 @@ export default class Http {
     const reqOriginConfig = { url, method, data, header }
     const reqConfig = { url:curl, method, data, header }
     const res = await promisic(wx.request)(reqConfig).catch(err => {
-      that.showToast('对不起,出现了一个错误')
+      that.showToast('对不起, 网络中断或服务器错误')
     })
     if (res) {
       return await this.dealRes(res, reqOriginConfig, refetch)
@@ -32,7 +34,8 @@ export default class Http {
       // 10100 refresh token 获取失败 10000 认证失败
       if (error_code === 10100 || error_code === 10000) {
         // 需要重新登录
-        return this.dealAuthFail()
+        // return this.dealAuthFail()
+        return this.authFail
       }
       // 10040 令牌失效 10050 令牌过期
       if (error_code === 10040 || error_code === 10050) {
@@ -55,12 +58,18 @@ export default class Http {
       content: '请先登录',
       success(res) {
         if (res.confirm) {
-          wx.switchTab({
-            url: '/pages/my/my'
+          wx.navigateTo({
+            url: '/pages/login/login'
           })
         }
+        // else if (res.cancel) {
+        //   wx.switchTab({
+        //     url: '/pages/home/home'
+        //   })
+        // }
       }
     })
+    return false
   }
 
   async refreshToken() {

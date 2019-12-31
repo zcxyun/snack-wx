@@ -58,6 +58,12 @@
   width: 100vw !important;
 }
 
+.l-segment {
+  top: 0rpx;
+  background: #fff;
+  position: sticky !important;
+}
+
 .detail-imgs {
   margin-top: 20rpx;
   margin-bottom: 120rpx;
@@ -75,6 +81,7 @@
   margin-top: 10rpx;
   margin-bottom: 120rpx;
   width: 90vw;
+  min-height: 84vh;
 }
 
 .key {
@@ -89,4 +96,5 @@
   width: 90vw;
   margin-top: 10rpx;
   margin-bottom: 150rpx;
+  min-height: 80vh;
 }

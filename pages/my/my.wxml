@@ -1,31 +1,69 @@
 <view class="container">
+  <z-popup-login />
   <view class="avatar-box">
     <l-avatar
       wx:if="{{authorized}}"
-      text="{{userInfo.nickName}}"
+      text="{{memberInfo.nickName}}"
       placement="right"
-      size="80"
-      src="{{userInfo.avatarUrl}}"
+      size="120"
+      shape="squre"
+      src="{{memberInfo.avatarUrl}}"
       l-text-class="avatar-text" />
-    <l-button
+    <!-- <l-button
       wx:else
       special="{{true}}"
       open-type="getUserInfo"
-      bind:getuserinfo="onGetUserInfo">
+      bind:getuserinfo="onGetUserInfo"> -->
       <l-avatar
-        size="80"
+        wx:else
+        bind:lintap="login"
+        size="120"
         icon="user"
+        icon-size="80"
         text="登录"
+        shape="squre"
         icon-color="#2c61b4"
         l-text-class="avatar-text" />
-    </l-button>
+    <!-- </l-button> -->
   </view>
   <view class="header-box">
-
+    <view class="header">
+      <view class="info-box">
+        <l-icon name="warning" size="28" color="#409EFF" />
+        <text class="header-text">关于我们</text>
+      </view>
+      <view class="separator"></view>
+      <view class="info-box">
+        <text class="like-num">12</text>
+        <text class="header-text">点赞</text>
+      </view>
+    </view>
+  </view>
+  <view class="order-box">
+    <view class="order-headerline" >我的订单</view>
+    <view class="order-menu">
+      <view class="order-menu-item">
+        <l-icon name="order" />
+        <text>待支付</text>
+      </view>
+      <view class="order-menu-item">
+        <l-icon name="order" />
+        <text>待发货</text>
+      </view>
+      <view class="order-menu-item">
+        <l-icon name="order" />
+        <text>待收货</text>
+      </view>
+      <view class="order-menu-item">
+        <l-icon name="order" />
+        <text>已完成</text>
+      </view>
+    </view>
   </view>
   <view class="menu-list">
     <l-list title="全部订单" icon="order" bind:lintap="onOrder" badge-count="8" badge-position="right" badge-max-count="99" />
     <l-list title="收货地址" icon="address" bind:lintap="onAddress" />
+    <l-list title="全部点赞" icon="like" bind:lintap="onLike"  />
     <!-- <l-list title="评论" icon="comment" bind:lintap="onComment"  /> -->
     <!-- <l-list title="消息" icon="notification" bind:lintap="onMessage" badge-count="99"  badge-position="right" badge-max-count="99" /> -->
   </view>

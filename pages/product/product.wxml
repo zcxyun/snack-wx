@@ -20,9 +20,11 @@
       <l-price l-class="del-price" value="{{product.price_str}}" deleted value-size="30"></l-price>
     </view>
   </view>
-  <l-segment bind:linchange="changeTabs" l-header-class="segment">
-    <l-segment-item wx:for="{{tabs}}" wx:key="key" tab="{{item.tab}}" key="{{item.key}}" />
-  </l-segment>
+  <view class="l-segment">
+    <l-segment bind:linchange="changeTabs" l-header-class="segment">
+      <l-segment-item wx:for="{{tabs}}" wx:key="key" tab="{{item.tab}}" key="{{item.key}}" />
+    </l-segment>
+  </view>
   <view class="detail-imgs" hidden="{{currentTab !== 'detail'}}">
     <block wx:for="{{product.desc_imgs}}" wx:key="order">
       <view><image src="{{item.image}}" class="detail-img" mode="widthFix"/></view>

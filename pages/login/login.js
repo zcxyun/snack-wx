@@ -1,4 +1,6 @@
-// pages/pay-result/pay-result.js
+import tokenModel from '../../models/token.js'
+import { promisic } from "../../utils/util.js";
+
 Component({
 
   /**
@@ -13,8 +15,33 @@ Component({
     /**
      * 生命周期函数--监听页面加载
      */
-    onLoad: function (options) {
+    onLoad: function () {
 
+    },
+
+    async getUserInfo(e) {
+      try {
+        const userInfo = e.detail.userInfo
+        if (userInfo) {
+          const { code } = await promisic(wx.login)()
+          if (code) {
+            const res = await tokenModel.getTokens({ code, ...userInfo })
+            if (res) {
+              this._showToast('登录成功')
+              wx.navigateBack()
+            }
+          }
+        }
+      } catch (error) {
+        console.log(error)
+      }
+    },
+
+    _showToast(text) {
+      wx.showToast({
+        title: text,
+        icon: 'none',
+      })
     },
 
     /**

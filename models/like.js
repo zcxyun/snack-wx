@@ -1,22 +1,34 @@
 import Http from '../utils/http.js'
 
 class Like extends Http {
-   like(id) {
-     return this.request({
+   async like(id) {
+     const res = await this.request({
        url: `like/product/${id}`,
        method: 'PUT',
      })
+     if (res === this.authFail) {
+       return this.dealAuthFail()
+     }
+     return res
    }
-   unlike(id) {
-    return this.request({
+   async unlike(id) {
+    const res = await this.request({
       url: `like/cancel/product/${id}`,
       method: 'PUT',
     })
+    if (res === this.authFail) {
+      return this.dealAuthFail()
+    }
+    return res
    }
-   getFavor(id) {
-     return this.request({
+   async getFavor(id) {
+     const res = await this.request({
         url: `like/info/product/${id}`
      })
+     if (res === this.authFail) {
+       return false
+     }
+     return res
    }
  }
 

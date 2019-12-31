@@ -1,4 +1,5 @@
 {
+  "component": true,
   "usingComponents": {
     "l-water-flow": "/dist/water-flow/index",
     "l-loading": "/dist/loading/index",

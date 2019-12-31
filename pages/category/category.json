@@ -1,4 +1,5 @@
 {
+  "component": true,
   "usingComponents": {
     "z-category-products-segment": "/components/category-products-segment/index",
     "l-loading": "/dist/loading/index"

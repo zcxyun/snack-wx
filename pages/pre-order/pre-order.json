@@ -1,0 +1,6 @@
+{
+  "component": true,
+  "usingComponents": {
+    "l-status-show": "/dist/status-show/index"
+  }
+}

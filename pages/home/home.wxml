@@ -1,6 +1,13 @@
 <view class="container">
   <z-search-bar bind:tap="onTapSearchBar" class="search-bar" />
   <z-banner items="{{bannerItems}}" bind:tap-item="onTapBannerItem"></z-banner>
+  <l-grid l-class="category-grid" show-border="{{false}}" row-num="3">
+    <l-grid-item wx:for="{{categories}}" wx:key="id"
+      key="{{index}}" slot="{{index}}" bind:linitemtap="onCategoryItem" cell="{{item}}">
+      <l-icon name="order" />
+      <view class="cate-name">{{item.name}}</view>
+    </l-grid-item>
+  </l-grid>
   <z-title text="{{themeTitle}}"></z-title>
   <z-themes items="{{themes}}" bind:click="onThemeClick"></z-themes>
   <z-title text="{{recentProductTitle}}"></z-title>

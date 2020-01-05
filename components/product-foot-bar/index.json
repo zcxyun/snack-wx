@@ -6,6 +6,7 @@
     "l-price": "/dist/price/index",
     "l-mask": "/dist/mask/index",
     "l-counter": "/dist/counter/index",
-    "l-badge": "/dist/badge/index"
+    "l-badge": "/dist/badge/index",
+    "l-popup": "/dist/popup/index"
   }
 }

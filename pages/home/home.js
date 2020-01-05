@@ -3,11 +3,13 @@ import bannerModel from "../../models/banner.js";
 import themeModel from "../../models/theme.js";
 import productModel from '../../models/product.js'
 import paginate from '../../behaviors/paginate.js'
+import categoryModel from '../../models/category.js'
 
 Component({
   behaviors: [paginate],
   data: {
     bannerItems: [],
+    categories: [],
     themes: [],
     themeTitle: '精选主题',
     recentProductTitle: '产品列表',
@@ -24,9 +26,12 @@ Component({
     async init () {
       this._loading(true)
       const bannerItemsPromise = bannerModel.get(bannerModel.idMap['首页置顶'])
+      const categoriesPromise = categoryModel.getAll()
       const themesPromise = themeModel.getAll()
       const productsPromise = productModel.getPaginate(0)
+
       const bannerItems = await bannerItemsPromise
+      const categories = await categoriesPromise
       const themes = await themesPromise
       const res = await productsPromise
       this._setMoreData(res.models)
@@ -34,6 +39,7 @@ Component({
       wx.lin.renderWaterFlow(res.models, false)
       this.setData({
         bannerItems,
+        categories,
         themes,
       })
       this._loading(false)
@@ -50,6 +56,13 @@ Component({
           url: `/pages/products/products?type=theme&id=${id}`
         })
       }
+    },
+
+    onCategoryItem(e) {
+      const { cell:{id} } = e.detail
+      wx.navigateTo({
+        url: `/pages/products/products?id=${id}`
+      })
     },
 
     onThemeClick(e) {

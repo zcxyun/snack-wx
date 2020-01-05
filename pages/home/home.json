@@ -8,6 +8,9 @@
     "z-product": "/components/product/index",
     "l-water-flow": "/dist/water-flow/index",
     "l-loadmore": "/dist/loadmore/index",
-    "l-loading": "/dist/loading/index"
+    "l-loading": "/dist/loading/index",
+    "l-grid": "/dist/grid/index",
+    "l-grid-item": "/dist/grid-item/index",
+    "l-icon": "/dist/icon/index"
   }
 }

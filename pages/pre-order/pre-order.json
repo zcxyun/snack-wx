@@ -1,6 +1,8 @@
 {
   "component": true,
   "usingComponents": {
-    "l-status-show": "/dist/status-show/index"
+    "l-icon": "/dist/icon/index",
+    "l-price": "/dist/price/index",
+    "l-dialog": "/dist/dialog/index"
   }
 }

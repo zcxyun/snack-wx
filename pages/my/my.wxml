@@ -1,5 +1,4 @@
 <view class="container">
-  <z-popup-login />
   <view class="avatar-box">
     <l-avatar
       wx:if="{{authorized}}"

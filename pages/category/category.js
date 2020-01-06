@@ -24,6 +24,9 @@ Page({
   },
 
   async _setProduct2Categories(categories, cid) {
+    if (categories.find(item => item.id == cid && item.products)) {
+      return
+    }
     const res = await categoryModel.getWithProducts(cid)
     categories.forEach(category => {
       if (category.id === res.id) {

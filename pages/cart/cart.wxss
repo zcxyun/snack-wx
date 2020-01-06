@@ -87,8 +87,12 @@
   margin-right: 20rpx;
 }
 
-.price {
+.old-price {
   margin-left: 20rpx;
+}
+
+.price {
+  margin-left: 0rpx;
 }
 
 .settlement-btn {

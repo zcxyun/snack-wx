@@ -13,7 +13,7 @@
   <block wx:for="{{data}}" wx:key="id" wx:for-item="category">
     <l-tabpanel tab="{{category.name}}" key="{{category.id}}" slot="{{category.id}}">
       <view class="content-container">
-        <image class="header-img" src="{{category.image}}" />
+        <image class="header-img" src="{{category.image}}" bind:tap="onMore" data-id="{{category.id}}" />
         <view class="products">
           <block wx:for="{{category.products}}" wx:for-item="product" wx:key="id">
             <view class="product" bind:tap="onProduct" data-id="{{product.id}}">
@@ -21,9 +21,6 @@
               <text class="product-name">{{product.name}}</text>
             </view>
           </block>
-        </view>
-        <view class="more">
-          <text bind:tap="onMore" data-id="{{category.id}}">更多 <l-icon name="more" /></text>
         </view>
       </view>
     </l-tabpanel>

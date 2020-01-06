@@ -4,7 +4,7 @@
   <l-grid l-class="category-grid" show-border="{{false}}" row-num="3">
     <l-grid-item wx:for="{{categories}}" wx:key="id"
       key="{{index}}" slot="{{index}}" bind:linitemtap="onCategoryItem" cell="{{item}}">
-      <l-icon name="order" />
+      <image class="cate-img" src="{{item.mini_image}}" />
       <view class="cate-name">{{item.name}}</view>
     </l-grid-item>
   </l-grid>

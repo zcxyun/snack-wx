@@ -18,8 +18,12 @@
         <view class="product-detail">
           <text class="name">{{product.name}}</text>
           <view class="detail-foot">
-            <l-price l-class="price" value="{{product.price_str}}"
-              color="#F56C6C" size="30" bold="600"></l-price>
+            <view>
+              <l-price l-class="price" value="{{product.price_str}}"
+                color="#F56C6C" size="30" bold="600"></l-price>
+              <l-price l-class="old-price" value="{{product.old_price_str}}" deleted
+                size="25" wx:if="{{product.old_price_str !== product.price_str}}"></l-price>
+            </view>
             <l-counter
               l-class="counter"
               max="{{maxCount}}"

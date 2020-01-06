@@ -13,7 +13,7 @@
     <view class='summary'>{{data.summary}}</view>
     <view class='price-container'>
       <l-price l-class="price" value="{{data.price_str}}" color="#F56C6C" size="30" bold="600"></l-price>
-      <l-price value="{{data.price_str}}" deleted size="25" ></l-price>
+      <l-price value="{{data.old_price_str}}" deleted size="25" wx:if="{{data.old_price_str !== data.price_str}}"></l-price>
     </view>
   </view>
 </l-card>

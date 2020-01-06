@@ -19,7 +19,7 @@
   </l-segment>
   <view class="content-container" wx:for="{{data}}" wx:key="id" wx:for-item="category"
     hidden="{{index !== currentTab}}">
-    <image class="header-img" src="{{category.image}}" />
+    <image class="header-img" src="{{category.image}}" bind:tap="onMore" data-id="{{category.id}}" />
     <view class="title-box">
       <view class="title-line"></view>
       <text class="title">{{category.name}}</text>
@@ -32,12 +32,6 @@
           <text class="product-name">{{product.name}}</text>
         </view>
       </block>
-    </view>
-    <view class="more">
-      <text bind:tap="onMore" data-id="{{category.id}}">
-        更多
-        <l-icon name="more" />
-      </text>
     </view>
   </view>
 </view>

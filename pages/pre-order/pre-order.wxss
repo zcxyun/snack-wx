@@ -79,7 +79,7 @@
 .product-price-box {
   display: flex;
   flex-direction: column;
-  padding: 10rpx;
+  padding: 0 10rpx;
   align-items: flex-end;
 }
 

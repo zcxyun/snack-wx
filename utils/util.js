@@ -67,19 +67,22 @@ const num2money = (num, count = 2) => {
   }
 }
 
-// 判断两个数组的内容是否一样(数组元素为对象))
+// 判断两个对象的内容是否相等(浅对象)
+const isObjEqual = function(oobj, dobj) {
+  if (type(oobj) !== 'object' || type(dobj) !== 'object') {
+    return false
+  }
+  return Object.keys(oobj).every(key => oobj[key] === dobj[key])
+}
+
+// 判断两个数组的内容是否一样(数组元素为对象, 对象比较为浅对象))
 const isArrEqual = function (oArr, dArr) {
   if (Array.isArray(oArr) && Array.isArray(dArr)) {
     if (oArr.length !== dArr.length) {
       return false
     }
     return oArr.every((item, index) => {
-      const { toString } = Object.prototype
-      const objDes = '[object Object]'
-      if (toString.call(item) !== objDes || toString.call(dArr[index]) !== objDes) {
-        return false
-      }
-      return Object.keys(item).every(key => item[key] === dArr[index][key])
+      return isObjEqual(item, dArr[index])
     })
   }
   return false
@@ -136,6 +139,8 @@ const getLoginStatusOfStorage = function() {
 }
 
 export {
+  type,
+  isObjEqual,
   isArrEqual,
   isEmptyArray,
   isNotEmptyArray,

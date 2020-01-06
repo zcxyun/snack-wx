@@ -17,7 +17,8 @@
     <view class="summary"><text>{{product.summary}}</text></view>
     <view class="price-box">
       <l-price l-class="price" value="{{product.price_str}}" color="#F56C6C" value-size="40"></l-price>
-      <l-price l-class="del-price" value="{{product.price_str}}" deleted value-size="30"></l-price>
+      <l-price l-class="del-price" value="{{product.old_price_str}}"
+        wx:if="{{product.old_price_str !== product.price_str}}" deleted value-size="30"></l-price>
     </view>
   </view>
   <view class="l-segment">

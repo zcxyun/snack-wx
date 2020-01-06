@@ -6,13 +6,17 @@
 
 .category-grid {
   width: 100vw !important;
-  height: 300rpx !important;
-  margin: 30rpx 0;
+  height: 400rpx !important;
+  margin: 30rpx 0 10rpx;
   box-shadow: 0 0 6px 2px #f3f3f3;
+}
+
+.cate-img {
+  width: 120rpx;
+  height: 120rpx;
 }
 
 .cate-name {
   font-size: 28rpx;
   color: #999;
-  margin-top: 15rpx;
 }

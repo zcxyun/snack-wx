@@ -26,7 +26,7 @@ Component({
     async init () {
       this._loading(true)
       const bannerItemsPromise = bannerModel.get(bannerModel.idMap['首页置顶'])
-      const categoriesPromise = categoryModel.getAll()
+      const categoriesPromise = categoryModel.getAllWithMiniImg()
       const themesPromise = themeModel.getAll()
       const productsPromise = productModel.getPaginate(0)
 

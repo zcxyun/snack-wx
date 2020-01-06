@@ -11,9 +11,10 @@ Component({
 
   data: {
     products: [],
-    totalPrice: '0.00',
+    oldTotalPrice: 0,
+    totalPrice: 0,
     totalCount: 0,
-    discountPrice: '0.00',
+    discountPrice: 0,
     address: null,
     showSettingDialog: false,
   },
@@ -42,9 +43,15 @@ Component({
         const bTotalPrice = parseFloat(b.price_str) * b.count
         return a + bTotalPrice
       }, 0)
+      let oldTotalPrice = products.reduce((a, b) => {
+        const bOldTotalPrice = parseFloat(b.old_price_str) * b.count
+        return a + bOldTotalPrice
+      }, 0)
+      const discountPrice = num2money(totalPrice - oldTotalPrice)
       totalPrice = num2money(totalPrice)
+      oldTotalPrice = num2money(oldTotalPrice)
       const totalCount = products.reduce((a, b) => a + b.count, 0)
-      this.setData({ products, totalPrice, totalCount })
+      this.setData({ products, totalPrice, oldTotalPrice, discountPrice, totalCount })
     },
 
     onAddress() {

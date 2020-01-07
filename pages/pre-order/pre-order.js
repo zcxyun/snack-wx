@@ -1,5 +1,6 @@
 import addressModel from "../../models/address.js"
 import cartModel from "../../models/cart.js";
+import orderModel from "../../models/order.js";
 import {
   num2money, isEmptyArray, isNotEmptyArray, promisic,
 } from '../../utils/util.js'
@@ -72,6 +73,23 @@ Component({
     onConfirm() {
       this.setData({ showSettingDialog: false })
       wx.openSetting()
+    },
+
+    async submit() {
+      const data = this.products.map(product => {
+        return {
+          product_id: product.id,
+          count: product.count,
+        }
+      })
+      const res = await orderModel.place(data)
+      if (res && res.msg) {
+        this._showToast(res.msg)
+        // 下单成功, 清空购物车
+        cartModel.clear()
+        // 拉起微信支付
+
+      }
     },
 
     _showToast(text) {

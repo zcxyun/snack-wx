@@ -34,7 +34,7 @@
         <view class="product-nums-box" wx:if="{{product.stock > 0}}">
           <text class="product-nums-text">购买数量</text>
           <l-counter max="{{maxCount}}" count="{{cartCount}}"
-            bind:lintap="onCounter" bind:linout="onCounterOverflow" />
+            catch:lintap="onCounter" bind:linout="onCounterOverflow" />
         </view>
         <view class="no-stock" wx:else >暂没有库存</view>
       </l-card>

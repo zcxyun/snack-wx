@@ -54,19 +54,27 @@
   margin-left: 20rpx;
 }
 
-.segment {
-  width: 100vw !important;
-}
-
 .l-segment {
   top: 0rpx;
   background: #fff;
   position: sticky !important;
+  z-index: 99;
+}
+
+.segment-header {
+  width: 100vw !important;
+}
+
+.segment-line {
+  width: 100rpx !important;
+  background: #F56C6C !important;
 }
 
 .detail-imgs {
   margin-top: 20rpx;
   margin-bottom: 120rpx;
+  position: relative;
+  min-height: 82vh;
 }
 
 .detail-img {
@@ -75,13 +83,16 @@
 }
 
 .params-box {
+  margin-top: 20rpx;
+  margin-bottom: 120rpx;
+  min-height: 82vh;
+}
+
+.params {
   display: flex;
   color: #666;
   font-size: 25rpx;
-  margin-top: 10rpx;
-  margin-bottom: 120rpx;
   width: 90vw;
-  min-height: 84vh;
 }
 
 .key {
@@ -94,7 +105,7 @@
 
 .comments-box {
   width: 90vw;
-  margin-top: 10rpx;
-  margin-bottom: 150rpx;
-  min-height: 80vh;
+  margin-top: 20rpx;
+  margin-bottom: 120rpx;
+  min-height: 82vh;
 }

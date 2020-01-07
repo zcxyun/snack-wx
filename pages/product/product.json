@@ -10,6 +10,7 @@
     "l-button": "/dist/button/index",
     "l-icon": "/dist/icon/index",
     "l-segment": "/dist/segment/index",
-    "l-segment-item": "/dist/segment-item/index"
+    "l-segment-item": "/dist/segment-item/index",
+    "l-status-show": "/dist/status-show/index"
   }
 }

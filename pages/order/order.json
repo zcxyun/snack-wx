@@ -1,4 +1,6 @@
 {
   "component": true,
-  "usingComponents": {}
+  "usingComponents": {
+    "z-order-list": "/components/order-list-tab/index"
+  }
 }

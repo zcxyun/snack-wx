@@ -21,23 +21,30 @@
         wx:if="{{product.old_price_str !== product.price_str}}" deleted value-size="30"></l-price>
     </view>
   </view>
+
   <view class="l-segment">
-    <l-segment bind:linchange="changeTabs" l-header-class="segment">
+    <l-segment bind:linchange="changeTabs" l-header-class="segment-header"
+      l-line-class="segment-line" animated-for-line>
       <l-segment-item wx:for="{{tabs}}" wx:key="key" tab="{{item.tab}}" key="{{item.key}}" />
     </l-segment>
   </view>
+
   <view class="detail-imgs" hidden="{{currentTab !== 'detail'}}">
-    <block wx:for="{{product.desc_imgs}}" wx:key="order">
+    <block wx:for="{{product.desc_imgs}}" wx:key="order" wx:if="{{product.desc_imgs}}">
       <view><image src="{{item.image}}" class="detail-img" mode="widthFix"/></view>
     </block>
+    <l-status-show show="{{!product.desc_imgs}}" type="data" full-screen="{{false}}" />
   </view>
   <view class="params-box" hidden="{{currentTab !== 'params'}}">
-    <view>
-      <view class="key" wx:for="{{product.properties}}" wx:key="name">{{item.name}}</view>
+    <view class="params" wx:if="{{product.properties}}">
+      <view>
+        <view class="key" wx:for="{{product.properties}}" wx:key="name">{{item.name}}</view>
+      </view>
+      <view>
+        <view class="value" wx:for="{{product.properties}}" wx:key="name">{{item.detail}}</view>
+      </view>
     </view>
-    <view>
-      <view class="value" wx:for="{{product.properties}}" wx:key="name">{{item.detail}}</view>
-    </view>
+    <l-status-show show="{{!product.properties}}" type="data" full-screen="{{false}}" />
   </view>
   <view class="comments-box" hidden="{{currentTab !== 'comments'}}">
     <view style="height: 20rpx;"></view>
@@ -45,6 +52,7 @@
     <view style="height: 20rpx;"></view>
     <z-short-comment comments="{{tapComments}}" bind:click-tag="postComment" bind:input-confirm="postComment" />
   </view>
+
 </view>
 <z-product-foot-bar
   product="{{product}}"

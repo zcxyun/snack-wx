@@ -64,6 +64,6 @@
       <text class="left-title">合计:</text>
       <l-price l-class="price" value="{{totalPrice}}" color="#000" size="30" bold="600"></l-price>
     </view>
-    <view class="commit">提交</view>
+    <view class="commit" bind:tap="submit">提交订单</view>
   </view>
 </view>

@@ -1,0 +1,7 @@
+{
+  "component": true,
+  "usingComponents": {
+    "l-tabs": "/dist/tabs/index",
+    "l-tabpanel": "/dist/tabpanel/index"
+  }
+}

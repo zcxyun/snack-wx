@@ -38,7 +38,7 @@ Component({
       this._showOptionPanel(true, 'nowBuy')
     },
     onMask() {
-      this._showOptionPanel(false, '')
+      this._showOptionPanel(false)
     },
     addToCart() {
       const id = this.properties.product.id
@@ -50,7 +50,7 @@ Component({
       const count = this.data.cartCount
       this.triggerEvent('now-buy', { id, count })
     },
-    _showOptionPanel(showOptionPanel, optionType) {
+    _showOptionPanel(showOptionPanel, optionType = '') {
       this.setData({showOptionPanel, optionType})
     },
     onCounter(e) {

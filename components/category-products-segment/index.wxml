@@ -2,6 +2,7 @@
   <l-segment
     bind:linchange="changeTabs"
     scrollable
+    even="{{false}}"
     width="160"
     height="1200"
     item-height="80"

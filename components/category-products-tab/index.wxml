@@ -6,6 +6,7 @@
   has-line="{{true}}"
   scrollable="{{true}}"
   placement="left"
+  equal-width="{{false}}"
   l-header-class="l-header-class"
   l-line-class="l-line-class"
   l-content-class="l-content-class"

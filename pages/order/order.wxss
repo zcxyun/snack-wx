@@ -1,1 +1,4 @@
-/* pages/order/order.wxss */
+.container {
+  background: #f2f2f2;
+  min-height: 100vh;
+}

@@ -1,14 +1,9 @@
-import addressModel from "../../models/address.js"
 import cartModel from "../../models/cart.js";
 import orderModel from "../../models/order.js";
-import {
-  num2money, isEmptyArray, isNotEmptyArray, promisic,
-} from '../../utils/util.js'
+import { num2money, isNotEmptyArray } from '../../utils/util.js'
 
 Component({
-  properties: {
-
-  },
+  properties: {},
 
   data: {
     products: [],
@@ -16,8 +11,7 @@ Component({
     totalPrice: 0,
     totalCount: 0,
     discountPrice: 0,
-    address: null,
-    showSettingDialog: false,
+    commitText: '提交订单',
   },
 
   methods: {
@@ -32,10 +26,6 @@ Component({
       const products = cartModel.getCartOfStorage()
       if (isNotEmptyArray(products)) {
         this.computeTotal(products)
-      }
-      const address = await addressModel.get()
-      if (address) {
-        this.setData({ address })
       }
     },
 
@@ -55,28 +45,10 @@ Component({
       this.setData({ products, totalPrice, oldTotalPrice, discountPrice, totalCount })
     },
 
-    onAddress() {
-      const that = this
-      promisic(wx.authorize)({scope: 'scope.address'}).then(async () => {
-        const address = await promisic(wx.chooseAddress)().catch(() => {})
-        if (address) {
-          const res = await addressModel.edit(address)
-          if (res) {
-            that.setData({ address })
-          }
-        }
-      }).catch(() => {
-        this.setData({ showSettingDialog: true })
-      })
-    },
 
-    onConfirm() {
-      this.setData({ showSettingDialog: false })
-      wx.openSetting()
-    },
 
     async submit() {
-      const data = this.products.map(product => {
+      const data = this.data.products.map(product => {
         return {
           product_id: product.id,
           count: product.count,
@@ -88,7 +60,11 @@ Component({
         // 下单成功, 清空购物车
         cartModel.clear()
         // 拉起微信支付
-
+        // 如果支付失败跳转到订单列表页面待付款区,
+        // 如果成功显示支付成功页面, 并显示跳转到首页或查看订单的按钮
+        wx.redirectTo({
+          url: '/pages/order-list/order-list'
+        })
       }
     },
 

@@ -1,2 +1,59 @@
-<!--components/order-list-segment/index.wxml-->
-<text>components/order-list-segment/index.wxml</text>
+<wxs src="../../utils/filter.wxs" module="utils"></wxs>
+<l-segment
+  l-class="seg-container"
+  l-header-class="seg-header"
+  l-line-class="seg-line"
+  active-key="{{activeKey}}"
+  animated-for-line
+  bind:linchange="changeTab"
+>
+  <l-segment-item wx:for="{{tabs}}" wx:key="key" tab="{{item.tab}}" key="{{item.key}}" />
+</l-segment>
+<l-loadmore show="{{loadingMore}}" type="loading" line >
+  <view wx:if="{{!noResult}}" class="seg-content" slot="content">
+    <view class="order-box" wx:for="{{dataArray}}" wx:key="id" wx:for-item="order">
+      <view class="header">
+        <text>订单编号: {{order.order_no}}</text>
+        <text>下单时间: {{order.create_time}}</text>
+        <view class="countdown-box" wx:if="{{order.order_status === orderStatus.UNPAID}}">
+          <text class="countdown-text">请在倒计时结束前付款:</text>
+          <l-countdown l-class-time="countdown-blue" l-class="countdown-text"
+            time="{{utils.dateStrAddSeconds(order.create_time, 180)}}"
+            time-type="datetime" format="{%m}分:{%s}秒"
+            data-id="{{order.id}}" bind:linend="countDownEnd" />
+        </view>
+      </view>
+      <l-card image="{{order.snap_img}}" title="{{order.snap_name}}" full
+        l-class="card" l-img-class="card-img" l-title-class="card-title">
+        <view class="card-content">
+          <text>总数量: {{order.total_count}}</text>
+          <l-tag plain font-color="#f56c6c" shape="circle" size="mini">
+            {{order.order_status_desc}}
+          </l-tag>
+        </view>
+      </l-card>
+      <view class="footer">
+        <view class="footer-left">
+          <text>实付:</text>
+          <l-price l-class="price" value="{{order.total_price_str}}" color="#f56c6c" size="30" bold="600"></l-price>
+        </view>
+        <view>
+          <l-button l-class="footer-button" type="error" size="mini" bind:lintap="payOrder" data-id="{{order.id}}" disabled="{{}}" wx:if="{{order.order_status === orderStatus.UNPAID}}">
+            付款
+          </l-button>
+          <l-button l-class="footer-button" type="warning" size="mini" bind:lintap="cancelOrder" data-id="{{order.id}}" wx:if="{{order.order_status === orderStatus.UNPAID}}">
+            取消订单
+          </l-button>
+          <l-button l-class="footer-button" type="success" size="mini" bind:lintap="confirmOrder" data-id="{{order.id}}" wx:if="{{order.order_status === orderStatus.UNRECEIPTED}}">
+            确认收货
+          </l-button>
+        </view>
+      </view>
+    </view>
+  </view>
+</l-loadmore>
+<l-loadmore show="{{isEnd}}" type="end" line></l-loadmore>
+<l-loading show="{{loading}}" wx:if="{{loading}}">
+  <view slot="content" style="height: 600rpx; width:100%"></view>
+</l-loading>
+<l-status-show show="{{noResult}}" type="order" />

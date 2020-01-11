@@ -31,7 +31,7 @@ Component({
       const categoryPromise = categoryModel.get(id)
       const res = await productsPromise
       if (res) {
-        this._setMoreData(res.models)
+        this._setMoreDataBack(res.models)
         this._setTotal(res.total)
         wx.lin.renderWaterFlow(res.models, false)
       } else {
@@ -100,7 +100,7 @@ Component({
         const start = this._getCurrentStart()
         const res = await productModel.getPaginateByCategory(id, start)
         if (res && res.models) {
-          this._setMoreData(res.models)
+          this._setMoreDataBack(res.models)
           wx.lin.renderWaterFlow(res.models, false)
         }
         this._lock(false)

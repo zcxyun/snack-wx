@@ -36,7 +36,7 @@
     <l-loadmore show="{{isEnd}}" type="end" line="{{true}}"></l-loadmore>
   </view>
 
-  <l-loading z-index="776" opacity="1" show="{{loadingSearch}}">
+  <l-loading z-index="776" opacity="1" show="{{loadingSearch}}" wx:if="{{loadingSearch}}">
     <view slot="content" style="height: 600rpx; width:100%"></view>
   </l-loading>
   <l-status-show show="{{noResult}}" type="data" />

@@ -1,69 +1,9 @@
 <view class="container">
-  <l-dialog show="{{showSettingDialog}}" type="confirm" title="授权"
-    content="请先授权我们获取您的收货地址" bind:linconfirm="onConfirm" />
-  <view class="address-box" bind:tap="onAddress">
-    <view class="address-icon">
-      <l-icon name="address" />
-    </view>
-    <view class="address" wx:if="{{!address}}">请选择收货地址</view>
-    <view class="address" wx:else>
-      <view class="address-name-phone">
-        <text>{{address.userName}}</text>
-        <text>{{address.telNumber}}</text>
-      </view>
-      <view class="address-location">
-        <text>{{address.provinceName}}</text>
-        <text>{{address.cityName}}</text>
-        <text>{{address.countyName}}</text>
-        <text>{{address.detailInfo}}</text>
-      </view>
-    </view>
-    <view class="right-arrow">
-      <l-icon name="right" size="32" />
-    </view>
-  </view>
-  <image class="addr-line" src="/images/addr-line.png" mode="widthFix" />
-  <view class="products-box">
-    <block wx:for="{{products}}" wx:for-item="product" wx:key="id">
-      <view class="product-box">
-        <image class="product-img" src="{{product.image}}" />
-        <view class="product-content">{{product.name}}</view>
-        <view class="product-price-box">
-          <l-price l-class="price" value="{{product.price_str}}"
-            color="#000" size="30" bold="600"></l-price>
-          <l-price l-class="old-price" value="{{product.old_price_str}}" deleted
-            color="#999" size="25" wx:if="{{product.old_price_str !== product.price_str}}"></l-price>
-          <view class="product-count-box">
-            <l-icon name="close" size="17" bold="600" color="#000" />
-            <text class="product-count">{{product.count}}</text>
-          </view>
-        </view>
-      </view>
-    </block>
-  </view>
-  <view class="total-box">
-    <view class="row">
-      <text>商品总金额:</text>
-      <l-price l-class="price" value="{{totalPrice}}" color="#000" size="30" bold="600"></l-price>
-    </view>
-    <view class="row">
-      <text>商品原总金额:</text>
-      <l-price l-class="price" value="{{oldTotalPrice}}" color="#000" size="30" bold="600"></l-price>
-    </view>
-    <view class="row">
-      <text>优惠:</text>
-      <l-price l-class="price" value="{{discountPrice}}" color="#000" size="30" bold="600"></l-price>
-    </view>
-    <view class="row">
-      <text>总数量:</text>
-      <text>{{totalCount}}</text>
-    </view>
-  </view>
-  <view class="foot-bar">
-    <view class="left">
-      <text class="left-title">合计:</text>
-      <l-price l-class="price" value="{{totalPrice}}" color="#000" size="30" bold="600"></l-price>
-    </view>
-    <view class="commit" bind:tap="submit">提交订单</view>
-  </view>
+  <z-address />
+  <z-order-detail-list products="{{products}}" />
+  <z-order-detail-total
+    totalPrice="{{totalPrice}}" oldTotalPrice="{{oldTotalPrice}}"
+    discountPrice="{{discountPrice}}" totalCount="{{totalCount}}"
+  />
+  <z-order-foot-bar totalPrice="{{totalPrice}}" commitText="{{commitText}}" bind:submit="submit" />
 </view>

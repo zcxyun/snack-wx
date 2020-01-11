@@ -42,9 +42,4 @@
       <view wx:elif="{{optionType === 'nowBuy'}}" class="foot-button-buy center" bind:tap="nowBuy">立即购买</view>
     </view>
   </l-popup>
-  <!-- <l-mask
-    show="{{showOptionPanel}}"
-    bind:lintap="onMask"
-    opacity="0.3"
-  ></l-mask> -->
 </view>

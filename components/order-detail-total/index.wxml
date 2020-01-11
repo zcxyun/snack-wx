@@ -1,0 +1,18 @@
+  <view class="total-box">
+    <view class="row">
+      <text>商品总金额:</text>
+      <l-price l-class="price" value="{{totalPrice}}" color="#000" size="30" bold="600"></l-price>
+    </view>
+    <view class="row">
+      <text>商品原总金额:</text>
+      <l-price l-class="price" value="{{oldTotalPrice}}" color="#000" size="30" bold="600"></l-price>
+    </view>
+    <view class="row">
+      <text>优惠:</text>
+      <l-price l-class="price" value="{{discountPrice}}" color="#000" size="30" bold="600"></l-price>
+    </view>
+    <view class="row">
+      <text>总数量:</text>
+      <text>{{totalCount}}</text>
+    </view>
+  </view>

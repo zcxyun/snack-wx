@@ -17,10 +17,7 @@ export default Behavior({
       })
     },
     _setTotal(total) {
-      this.setData({
-        total,
-        noResult: !total
-      })
+      this.data.total = total
     },
     _lock(loadingMore) {
       this.setData({
@@ -29,6 +26,9 @@ export default Behavior({
     },
     _isLocked() {
       return this.data.loadingMore
+    },
+    _setMoreDataBack(moreData) {
+      this.data.dataArray = this.data.dataArray.concat(moreData)
     },
     _setMoreData(moreData) {
       this.setData({

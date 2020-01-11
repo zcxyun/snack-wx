@@ -1,1 +1,6 @@
-<z-order-list />
+<view class="container">
+  <z-address />
+  <z-order-detail-list products="{{products}}" />
+  <z-order-detail-total totalPrice="{{totalPrice}}" oldTotalPrice="{{oldTotalPrice}}" discountPrice="{{discountPrice}}" totalCount="{{totalCount}}" />
+  <z-order-foot-bar totalPrice="{{totalPrice}}" commitText="{{commitText}}" bind:submit="submit" />
+</view>

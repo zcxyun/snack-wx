@@ -1,0 +1,7 @@
+<view class="foot-bar">
+  <view class="left">
+    <text class="left-title">合计:</text>
+    <l-price value="{{totalPrice}}" color="#000" size="30" bold="600"></l-price>
+  </view>
+  <view class="commit" bind:tap="submit">{{commitText}}</view>
+</view>

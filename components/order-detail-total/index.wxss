@@ -1,0 +1,14 @@
+.total-box {
+  width: 100vw;
+  background: #fff;
+  padding: 10rpx 30rpx 20rpx;
+  margin-top: 30rpx;
+  box-sizing: border-box;
+  font-size: 28rpx;
+}
+
+.row {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10rpx;
+}

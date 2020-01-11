@@ -1,0 +1,25 @@
+<view class="address-container">
+  <l-dialog show="{{showSettingDialog}}" type="confirm" title="授权" content="请先授权我们获取您的收货地址" bind:linconfirm="onConfirm" />
+  <view class="address-box" bind:tap="onAddress">
+    <view class="address-icon">
+      <l-icon name="address" />
+    </view>
+    <view class="address" wx:if="{{!address}}">请选择收货地址</view>
+    <view class="address" wx:else>
+      <view class="address-name-phone">
+        <text>{{address.userName}}</text>
+        <text>{{address.telNumber}}</text>
+      </view>
+      <view class="address-location">
+        <text>{{address.provinceName}}</text>
+        <text>{{address.cityName}}</text>
+        <text>{{address.countyName}}</text>
+        <text>{{address.detailInfo}}</text>
+      </view>
+    </view>
+    <view class="right-arrow" wx:if="{{!readOnly}}">
+      <l-icon name="right" size="32" />
+    </view>
+  </view>
+  <image class="addr-line" src="/images/addr-line.png" mode="widthFix" />
+</view>

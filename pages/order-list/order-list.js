@@ -1,11 +1,17 @@
-// pages/order/order.js
+// pages/order-list/order-list.js
 Component({
+  properties: {
+    activeKey: {
+      type: String,
+      value: 'ALL',
+    }
+  },
 
   /**
    * 页面的初始数据
    */
   data: {
-
+    more: '',
   },
 
   methods: {
@@ -14,16 +20,9 @@ Component({
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
-      this.init()
-    },
-
-    init () {
 
     },
 
-    async submit() {
-
-    },
     /**
      * 生命周期函数--监听页面初次渲染完成
      */
@@ -63,7 +62,7 @@ Component({
      * 页面上拉触底事件的处理函数
      */
     onReachBottom: function () {
-
+      this.setData({ more: 'more' })
     },
 
     /**

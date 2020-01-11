@@ -34,9 +34,13 @@ Component({
       const categories = await categoriesPromise
       const themes = await themesPromise
       const res = await productsPromise
-      this._setMoreData(res.models)
-      this._setTotal(res.total)
-      wx.lin.renderWaterFlow(res.models, false)
+      if (!res || !res.total) {
+        this._setNoResult(true)
+      } else {
+        this._setMoreDataBack(res.models)
+        this._setTotal(res.total)
+        wx.lin.renderWaterFlow(res.models, false)
+      }
       this.setData({
         bannerItems,
         categories,
@@ -128,7 +132,7 @@ Component({
         this._lock(true)
         const res = await productModel.getPaginate(this._getCurrentStart())
         if (res && res.models) {
-          this._setMoreData(res.models)
+          this._setMoreDataBack(res.models)
           wx.lin.renderWaterFlow(res.models, false)
         }
         this._lock(false)

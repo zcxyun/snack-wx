@@ -1,0 +1,7 @@
+{
+  "component": true,
+  "usingComponents": {
+    "l-icon": "/dist/icon/index",
+    "l-dialog": "/dist/dialog/index"
+  }
+}

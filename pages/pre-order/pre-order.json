@@ -1,8 +1,9 @@
 {
   "component": true,
   "usingComponents": {
-    "l-icon": "/dist/icon/index",
-    "l-price": "/dist/price/index",
-    "l-dialog": "/dist/dialog/index"
+    "z-address": "/components/address/index",
+    "z-order-detail-list": "/components/order-detail-list/index",
+    "z-order-detail-total": "/components/order-detail-total/index",
+    "z-order-foot-bar": "/components/order-foot-bar/index"
   }
 }

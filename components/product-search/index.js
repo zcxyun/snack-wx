@@ -20,7 +20,6 @@ Component({
     searching: false,
     searchKeys: '',
     loadingSearch: false,
-    loadmoreType: 'loading',
     searchPlaceHolder: '请输入要搜索的商品名'
   },
 
@@ -37,7 +36,7 @@ Component({
         const res = await productModel.search(
           this.data.searchKeys, this._getCurrentStart())
         if (res && res.models) {
-          this._setMoreData(res.models)
+          this._setMoreDataBack(res.models)
           wx.lin.renderWaterFlow(res.models, false)
         }
         this._lock(false)
@@ -85,7 +84,7 @@ Component({
       if (res) {
         this._setKeys(text)
         this._setTotal(res.total)
-        this._setMoreData(res.models)
+        this._setMoreDataBack(res.models)
         wx.lin.renderWaterFlow(res.models, false)
       } else {
         this._setNoResult(true)

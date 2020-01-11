@@ -1,1 +1,102 @@
-/* components/order-list-segment/index.wxss */
+.seg-container {
+  position: fixed !important;
+  top: 0 !important;
+  z-index: 99;
+  box-shadow: 0 0 6px 3px #eee;
+  background: #fff;
+}
+
+.seg-header {
+  width: 100vw;
+}
+
+.seg-line {
+  width: 80rpx !important;
+  background: #f56c6c !important;
+}
+
+.seg-content {
+  padding-top: 80rpx;
+  width: 100%;
+}
+
+.order-box {
+  width: 100%;
+  margin-top: 20rpx;
+  background: #fff;
+  box-shadow: 0 0 6px 2px #eee;
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  padding: 10rpx 20rpx;
+  font-size: 28rpx;
+  color: #999;
+}
+
+.header > text {
+  line-height: 50rpx;
+}
+
+.countdown-box {
+  display: flex;
+  align-items: center;
+}
+
+.countdown-text {
+  margin-right: 10rpx;
+}
+
+.header .countdown-blue {
+  width: 30rpx;
+  height: 30rpx;
+  background: transparent;
+  color: #3683D6;
+}
+
+.header .countdown-text {
+  color: #3683D6;
+  line-height: 50rpx !important;
+}
+
+
+.card {
+  border-top: 1rpx solid #f2f2f2;
+  border-bottom: 1rpx solid #f2f2f2;
+}
+
+.card-img {
+  width: 100rpx !important;
+  height: 100rpx !important;
+}
+
+.card-title {
+  font-size: 30rpx !important;
+}
+
+.card-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 25rpx;
+  color: #999;
+  margin-top: 10rpx;
+}
+
+.footer {
+  padding: 20rpx;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 28rpx;
+  color: #999;
+}
+
+.footer-left {
+  display: flex;
+}
+
+.footer-button {
+  margin-left: 20rpx;
+}

@@ -1,0 +1,6 @@
+{
+  "component": true,
+  "usingComponents": {
+    "z-order-list-segment": "/components/order-list-segment/index"
+  }
+}

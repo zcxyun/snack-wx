@@ -109,9 +109,15 @@ Component({
       }
     },
 
-    onNowBuy(e) {
+    async onNowBuy(e) {
       const { id, count } = e.detail
-      console.log(id, count)
+      const res = await cartModel.edit(id, count)
+      if (res && res.msg) {
+        this._showOptionPanel(false)
+        wx.navigateTo({
+          url: "/pages/pre-order/pre-order"
+        })
+      }
     },
 
     changeTabs(e) {

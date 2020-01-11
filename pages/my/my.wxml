@@ -41,26 +41,15 @@
   <view class="order-box">
     <view class="order-headerline" >我的订单</view>
     <view class="order-menu">
-      <view class="order-menu-item">
+      <view class="order-menu-item" wx:for="{{orderMenu}}" wx:key="key"
+        bind:tap="onOrderMenu" data-key="{{item.key}}">
         <l-icon name="order" />
-        <text>待支付</text>
-      </view>
-      <view class="order-menu-item">
-        <l-icon name="order" />
-        <text>待发货</text>
-      </view>
-      <view class="order-menu-item">
-        <l-icon name="order" />
-        <text>待收货</text>
-      </view>
-      <view class="order-menu-item">
-        <l-icon name="order" />
-        <text>已完成</text>
+        <text>{{item.name}}</text>
       </view>
     </view>
   </view>
   <view class="menu-list">
-    <l-list title="全部订单" icon="order" bind:lintap="onOrder" badge-count="8" badge-position="right" badge-max-count="99" />
+    <l-list title="全部订单" icon="order" bind:lintap="onAllOrder" badge-count="8" badge-position="right" badge-max-count="99" />
     <l-list title="收货地址" icon="address" bind:lintap="onAddress" />
     <l-list title="全部点赞" icon="like" bind:lintap="onLike"  />
     <!-- <l-list title="评论" icon="comment" bind:lintap="onComment"  /> -->

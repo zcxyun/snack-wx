@@ -1,0 +1,28 @@
+.foot-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100vw;
+  display: flex;
+  z-index: 99;
+  background: #fff;
+  height: 80rpx;
+}
+
+.left {
+  flex: 1;
+  line-height: 80rpx;
+  margin-left: 20rpx;
+}
+
+.left-title {
+  margin-right: 20rpx;
+}
+
+.commit {
+  background: #F56C6C;
+  color: #fff;
+  width: 200rpx;
+  line-height: 80rpx;
+  text-align: center;
+}

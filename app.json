@@ -10,6 +10,7 @@
     "pages/product-search/product-search",
     "pages/pre-order/pre-order",
     "pages/order/order",
+    "pages/order-list/order-list",
     "pages/pay-result/pay-result",
     "pages/login/login"
   ],

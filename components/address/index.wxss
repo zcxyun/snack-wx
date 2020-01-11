@@ -1,0 +1,47 @@
+.address-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.address-box {
+  display: flex;
+  background: #f4f8f8;
+  padding: 40rpx;
+  align-items: center;
+  width: 100vw;
+}
+
+.address-icon {
+  width: 100rpx;
+  position: relative;
+  bottom: 28rpx;
+  text-align: center;
+}
+
+.address {
+  flex: 1;
+}
+
+.address-name-phone {
+  margin-bottom: 15rpx;
+}
+
+.address-name-phone > text {
+  margin-right: 25rpx;
+}
+
+.address-location {
+  color: #666;
+}
+
+.address-location > text {
+  margin-right: 10rpx;
+}
+
+.right-arrow {
+  margin-right: 20rpx;
+}
+
+.addr-line {
+  width: 100%;
+}

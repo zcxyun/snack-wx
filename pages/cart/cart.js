@@ -36,6 +36,8 @@ Component({
         products.forEach((product) => { product.slideClose = true })
         this.data.products = products
         this._recount()
+      } else {
+        this.setData({ products: [] })
       }
     },
 

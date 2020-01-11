@@ -1,6 +1,9 @@
 {
   "component": true,
   "usingComponents": {
-    "z-order-list": "/components/order-list-tab/index"
+    "z-address": "/components/address/index",
+    "z-order-detail-list": "/components/order-detail-list/index",
+    "z-order-detail-total": "/components/order-detail-total/index",
+    "z-order-foot-bar": "/components/order-foot-bar/index"
   }
 }

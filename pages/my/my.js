@@ -13,6 +13,19 @@ Component({
     authorized: false,
     memberInfo: null,
     showSettingDialog: false,
+    orderMenu: [{
+      name: '待付款',
+      key: 'UNPAID',
+    }, {
+      name: '待发货',
+      key: 'UNDELIVERED',
+    }, {
+      name: '待收货',
+      key: 'UNRECEIPTED',
+    }, {
+      name: '已完成',
+      key: 'DONE',
+    }]
   },
   methods: {
     /**
@@ -45,10 +58,17 @@ Component({
       }
     },
 
+    onOrderMenu(e) {
+      const { key } = e.currentTarget.dataset
+      wx.navigateTo({
+        url:`/pages/order-list/order-list?activeKey=${key}`
+      })
+    },
 
-
-    onOrder() {
-
+    onAllOrder() {
+      wx.navigateTo({
+        url: "/pages/order-list/order-list"
+      })
     },
 
     async onAddress() {

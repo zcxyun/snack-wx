@@ -1,4 +1,15 @@
 {
   "component": true,
-  "usingComponents": {}
+  "usingComponents": {
+    "l-segment": "/dist/segment/index",
+    "l-segment-item": "/dist/segment-item/index",
+    "l-card": "/dist/card/index",
+    "l-price": "/dist/price/index",
+    "l-button": "/dist/button/index",
+    "l-status-show": "/dist/status-show/index",
+    "l-loading": "/dist/loading/index",
+    "l-loadmore": "/dist/loadmore/index",
+    "l-tag": "/dist/tag/index",
+    "l-countdown": "/dist/countdown/index"
+  }
 }

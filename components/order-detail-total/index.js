@@ -1,10 +1,13 @@
-// components/order-list-tab/index.js
+// components/order-detail-total/index.js
 Component({
   /**
    * 组件的属性列表
    */
   properties: {
-
+    totalPrice: String,
+    oldTotalPrice: String,
+    discountPrice: String,
+    totalCount: Number,
   },
 
   /**

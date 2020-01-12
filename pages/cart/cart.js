@@ -31,7 +31,7 @@ Component({
     },
 
     async init() {
-      const products = await cartModel.getProducts()
+      const products = await cartModel.getProducts().catch(() => {})
       if (isNotEmptyArray(products)) {
         products.forEach((product) => { product.slideClose = true })
         this.data.products = products
@@ -104,7 +104,7 @@ Component({
       }
       this._loading(true)
       const products = this.data.products.filter((item) => item.selected)
-      const res = await cartModel.editAll(products)
+      const res = await cartModel.editAll(products).catch(() => {})
       if (res) {
         this.setData({products, allSelected: true})
       }
@@ -116,7 +116,7 @@ Component({
         return
       }
       this._loading(true)
-      const res = await cartModel.clear()
+      const res = await cartModel.clear().catch(() => {})
       if (res && res.msg) {
         this._showToast(res.msg)
         this.setData({products: []})
@@ -131,7 +131,7 @@ Component({
       this._loading(true)
       const { id } = e.currentTarget.dataset
       const products = this.data.products.filter((item) => item.id !== id)
-      const res = await cartModel.editAll(products)
+      const res = await cartModel.editAll(products).catch(() => {})
       if (res) {
         this.data.products = products
         this._recount()
@@ -153,7 +153,7 @@ Component({
     },
 
     async settleAccount() {
-      const res = await cartModel.editAll(this.data.products)
+      const res = await cartModel.editAll(this.data.products).catch(() => {})
       if (res) {
         wx.navigateTo({
           url: '/pages/pre-order/pre-order'
@@ -194,7 +194,7 @@ Component({
      * 生命周期函数--监听页面隐藏
      */
     async onHide() {
-      cartModel.editAll(this.data.products)
+      await cartModel.editAll(this.data.products).catch(() => {})
     },
 
     /**

@@ -12,9 +12,6 @@ class Member extends Http {
     memberInfo = await this.request({
       url: 'member/get'
     })
-    if (memberInfo === this.authFail) {
-      return this.dealAuthFail()
-    }
     if (memberInfo) {
       this.setMemberInfoToStorage(memberInfo)
     }
@@ -32,9 +29,6 @@ class Member extends Http {
         method: 'POST',
         data: userInfo,
       })
-      if (res === this.authFail) {
-        return this.dealAuthFail()
-      }
       if (res) {
         this.setMemberInfoToStorage(userInfo)
       }

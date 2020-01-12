@@ -3,9 +3,15 @@ import orderModel from "../../models/order.js";
 import { num2money, isNotEmptyArray } from '../../utils/util.js'
 
 Component({
-  properties: {},
+  properties: {
+    product: {
+      type: Object,
+      value: null,
+    },
+  },
 
   data: {
+    fromCart: false,
     products: [],
     oldTotalPrice: 0,
     totalPrice: 0,
@@ -15,15 +21,20 @@ Component({
   },
 
   methods: {
-    /**
-     * 生命周期函数--监听页面加载
-     */
     onLoad: function () {
       this.init()
     },
 
     async init () {
-      const products = cartModel.getCartOfStorage()
+      let products = null
+      const product = this.properties.product
+      this.data.fromCart = product === null
+      // 如果product有值来自立即购买, 否则来自购物车
+      if (this.data.fromCart) {
+        products = await cartModel.getProducts().catch(() => {})
+      } else {
+        products = [product]
+      }
       if (isNotEmptyArray(products)) {
         this.computeTotal(products)
       }
@@ -45,8 +56,6 @@ Component({
       this.setData({ products, totalPrice, oldTotalPrice, discountPrice, totalCount })
     },
 
-
-
     async submit() {
       const data = this.data.products.map(product => {
         return {
@@ -54,11 +63,13 @@ Component({
           count: product.count,
         }
       })
-      const res = await orderModel.place(data)
+      const res = await orderModel.place(data).catch(() => {})
       if (res && res.msg) {
         this._showToast(res.msg)
-        // 下单成功, 清空购物车
-        cartModel.clear()
+        // 下单成功, 如果来自购物车就清空购物车
+        if (this.data.fromCart) {
+          cartModel.clear()
+        }
         // 拉起微信支付
         // 如果支付失败跳转到订单列表页面待付款区,
         // 如果成功显示支付成功页面, 并显示跳转到首页或查看订单的按钮

@@ -36,11 +36,26 @@
 }
 
 .price-box {
+  display: flex;
+  align-items: center;
   margin: 20rpx 0;
 }
 
 .del-price {
   margin-left: 20rpx;
+}
+
+.stock-box {
+  margin-left: 80rpx;
+}
+
+.stock {
+  color: #999;
+}
+
+.no-stock {
+  color: #3683d6;
+  margin-left: 80rpx;
 }
 
 .share-box {

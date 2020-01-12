@@ -19,6 +19,12 @@
       <l-price l-class="price" value="{{product.price_str}}" color="#F56C6C" value-size="40"></l-price>
       <l-price l-class="del-price" value="{{product.old_price_str}}"
         wx:if="{{product.old_price_str !== product.price_str}}" deleted value-size="30"></l-price>
+      <view class="stock-box" wx:if="{{product.stock}}">
+        <text>还剩: </text>
+        <text class="stock">{{product.stock}}</text>
+        <text> 件商品</text>
+      </view>
+      <text class="no-stock" wx:else>暂时卖完了</text>
     </view>
   </view>
 

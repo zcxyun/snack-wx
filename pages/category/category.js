@@ -18,8 +18,10 @@ Page({
 
   async _init() {
     this._loading(true)
-    const categories = await categoryModel.getAll()
-    this._setProduct2Categories(categories, categories[0].id)
+    const categories = await categoryModel.getAll().catch(() => {})
+    if (categories) {
+      this._setProduct2Categories(categories, categories[0].id)
+    }
     this._loading(false)
   },
 
@@ -27,16 +29,18 @@ Page({
     if (categories.find(item => item.id == cid && item.products)) {
       return
     }
-    const res = await categoryModel.getWithProducts(cid)
-    categories.forEach(category => {
-      if (category.id === res.id) {
-        category.products = res.products
-        category.image = res.image
-      }
-    })
-    this.setData({
-      categories,
-    })
+    const res = await categoryModel.getWithProducts(cid).catch(() => {})
+    if (res) {
+      categories.forEach(category => {
+        if (category.id === res.id) {
+          category.products = res.products
+          category.image = res.image
+        }
+      })
+      this.setData({
+        categories,
+      })
+    }
   },
 
   onChangeTabs(e) {

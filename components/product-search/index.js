@@ -34,7 +34,7 @@ Component({
       if (this._hasMore()) {
         this._lock(true)
         const res = await productModel.search(
-          this.data.searchKeys, this._getCurrentStart())
+          this.data.searchKeys, this._getCurrentStart()).catch(() => {})
         if (res && res.models) {
           this._setMoreDataBack(res.models)
           wx.lin.renderWaterFlow(res.models, false)
@@ -57,12 +57,16 @@ Component({
    */
   methods: {
     async _getHotKeys() {
-      const hotKeys = await keywordModel.getHotKeys()
-      this.setData({hotKeys})
+      const hotKeys = await keywordModel.getHotKeys().catch(() => {})
+      if (hotKeys) {
+        this.setData({hotKeys})
+      }
     },
     _getHistoryKeys() {
       const historyKeys = keywordModel.getHistoryKeys()
-      this.setData({historyKeys})
+      if (historyKeys) {
+        this.setData({historyKeys})
+      }
     },
     onCancel() {
       this._initPaginate()
@@ -80,7 +84,7 @@ Component({
       this._showLoadingSearch(true)
       this._searching(true)
       this._setInputValue(text)
-      const res = await productModel.search(text)
+      const res = await productModel.search(text).catch(() => {})
       if (res) {
         this._setKeys(text)
         this._setTotal(res.total)
@@ -92,9 +96,9 @@ Component({
       this._showLoadingSearch(false)
     },
     async _setKeys(text) {
-      const hotKeys = await keywordModel.setHotKey(text)
+      const hotKeys = await keywordModel.setHotKey(text).catch(() => {})
       this.setData({
-        hotKeys,
+        hotKeys: hotKeys || [],
         historyKeys: keywordModel.setHistoryKey(text)
       })
 

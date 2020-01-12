@@ -19,6 +19,7 @@ Component({
     cartCount: 1,
     optionType: '',
     maxCount: 10,
+    noStockText: '已经没库存了, 不能再点了',
   },
 
   /**
@@ -43,12 +44,22 @@ Component({
     addToCart() {
       const id = this.properties.product.id
       const count = this.data.cartCount
-      this.triggerEvent('add-to-cart', {id, count})
+      const stock = this.properties.product.stock
+      if (stock > 0) {
+        this.triggerEvent('add-to-cart', {id, count})
+      } else {
+        this._showToast(this.data.noStockText)
+      }
     },
     nowBuy(e) {
       const id = this.properties.product.id
       const count = this.data.cartCount
-      this.triggerEvent('now-buy', { id, count })
+      const stock = this.properties.product.stock
+      if (stock > 0) {
+        this.triggerEvent('now-buy', { id, count })
+      } else {
+        this._showToast(this.data.noStockText)
+      }
     },
     _showOptionPanel(showOptionPanel, optionType = '') {
       this.setData({showOptionPanel, optionType})

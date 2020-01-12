@@ -29,7 +29,7 @@ Component({
       const id = this.properties.id
       const productsPromise = productModel.getPaginateByCategory(id)
       const categoryPromise = categoryModel.get(id)
-      const res = await productsPromise
+      const res = await productsPromise.catch(() => {})
       if (res) {
         this._setMoreDataBack(res.models)
         this._setTotal(res.total)
@@ -37,7 +37,7 @@ Component({
       } else {
         this._setNoResult(true)
       }
-      const category = await categoryPromise
+      const category = await categoryPromise.catch(() => {})
       if (category) {
         this.setData({
           headerImg: category.image
@@ -98,7 +98,7 @@ Component({
         this._lock(true)
         const id = this.properties.id
         const start = this._getCurrentStart()
-        const res = await productModel.getPaginateByCategory(id, start)
+        const res = await productModel.getPaginateByCategory(id, start).catch(() => {})
         if (res && res.models) {
           this._setMoreDataBack(res.models)
           wx.lin.renderWaterFlow(res.models, false)

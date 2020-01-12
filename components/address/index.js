@@ -22,7 +22,7 @@ Component({
 
   lifetimes: {
     async attached() {
-      const address = await addressModel.get()
+      const address = await addressModel.get().catch(() => {})
       if (address) {
         this.setData({ address })
       }
@@ -39,9 +39,9 @@ Component({
       }
       const that = this
       promisic(wx.authorize)({ scope: 'scope.address' }).then(async () => {
-        const address = await promisic(wx.chooseAddress)().catch(() => { })
+        const address = await promisic(wx.chooseAddress)().catch(() => {})
         if (address) {
-          const res = await addressModel.edit(address)
+          const res = await addressModel.edit(address).catch(() => {})
           if (res) {
             that.setData({ address })
           }

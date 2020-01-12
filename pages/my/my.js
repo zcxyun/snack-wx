@@ -1,17 +1,11 @@
-import {
-  promisic,
-  getLoginStatusOfStorage,
-  setLoginStatusToStorage
-} from "../../utils/util.js"
+import { promisic } from "../../utils/util.js"
 import memberModel from '../../models/member.js'
+import addressModel from "../../models/address.js"
 
 Component({
-  /**
-   * 页面的初始数据
-   */
   data: {
     authorized: false,
-    memberInfo: null,
+    memberInfo: {},
     showSettingDialog: false,
     orderMenu: [{
       name: '待付款',
@@ -28,9 +22,6 @@ Component({
     }]
   },
   methods: {
-    /**
-     * 生命周期函数--监听页面加载
-     */
     onLoad: function () {
     },
 
@@ -74,7 +65,13 @@ Component({
     async onAddress() {
       const that = this
       promisic(wx.authorize)({scope: 'scope.address'}).then(async () => {
-        const res = await promisic(wx.chooseAddress)().catch(() => {})
+        const address = await promisic(wx.chooseAddress)().catch(() => {})
+        if (address) {
+          const res = await addressModel.edit(address).catch(() => {})
+          if (res) {
+            that._showToast('收货地址更新成功')
+          }
+        }
       }).catch(() => {
         that.setData({showSettingDialog: true})
       })
@@ -86,7 +83,7 @@ Component({
       })
     },
 
-    async onConfirm() {
+    onConfirm() {
       this.setData({showSettingDialog: false})
       wx.openSetting()
     },

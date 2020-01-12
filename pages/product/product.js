@@ -36,10 +36,6 @@ Component({
   },
 
   methods: {
-
-    /**
-     * 生命周期函数--监听页面加载
-     */
     onLoad: function () {
       this.init()
     },
@@ -47,28 +43,29 @@ Component({
     async init() {
       this._loading(true)
       const id = this.properties.id
-
       const cartTotalCountPromise =  cartModel.getTotalCount()
       const productPromise = productModel.get(id)
       const commentsPromise = commentModel.getByProduct(id)
       const likePromise = likeModel.getFavor(id)
 
-      const cartTotalCount = await cartTotalCountPromise
-      const product = await productPromise
-      const comments = await commentsPromise
-      const like = await likePromise
+      try {
+        const cartTotalCount = await cartTotalCountPromise
+        const product = await productPromise
+        const comments = await commentsPromise
+        const like = await likePromise
 
-      if (product.desc_imgs && Array.isArray(product.desc_imgs)) {
-        product.desc_imgs.sort((a, b) => a.order - b.order)
-      }
-      this.setData({
-        cartTotalCount: cartTotalCount ? cartTotalCount.total_count : 0,
-        product: product || {},
-        comments: comments || [],
-        tapComments: comments ? comments.slice(0, 3) : [],
-        likeStatus: like ? like.like_status : false,
-        likeCount: like ? like.like_count : 0,
-      })
+        if (product.desc_imgs && Array.isArray(product.desc_imgs)) {
+          product.desc_imgs.sort((a, b) => a.order - b.order)
+        }
+        this.setData({
+          cartTotalCount: cartTotalCount ? cartTotalCount.total_count : 0,
+          product: product || {},
+          comments: comments || [],
+          tapComments: comments ? comments.slice(0, 3) : [],
+          likeStatus: like ? like.like_status : false,
+          likeCount: like ? like.like_count : 0,
+        })
+      } catch (error) {}
       this._loading(false)
     },
 
@@ -77,11 +74,11 @@ Component({
       const id = this.data.product.id
       let res = null
       if (isLike) {
-        res = await likeModel.like(id)
+        res = await likeModel.like(id).catch(() => {})
       } else {
-        res = await likeModel.unlike(id)
+        res = await likeModel.unlike(id).catch(() => {})
       }
-      if (res) {
+      if (res && res.msg) {
         this._showToast(res.msg)
       }
     },
@@ -100,23 +97,38 @@ Component({
 
     async onAddToCart(e) {
       const { id, count } = e.detail
-      const res = await cartModel.edit(id, count)
-      if (res && res.msg) {
-        this._showToast(res.msg)
-        this._showOptionPanel(false)
-        const cartTotalCount = await cartModel.getTotalCount()
-        this.setData({cartTotalCount: cartTotalCount.total_count})
+      try {
+        const res = await cartModel.edit(id, count)
+        if (res && res.msg) {
+          this._showToast(res.msg)
+          this._showOptionPanel(false)
+          const cartTotalCount = await cartModel.getTotalCount()
+          this.setData({cartTotalCount: cartTotalCount.total_count})
+        }
+      } catch (error) {
+        if (error.error_code === 30000) {
+          this.init()
+        }
       }
     },
 
     async onNowBuy(e) {
       const { id, count } = e.detail
-      const res = await cartModel.edit(id, count)
-      if (res && res.msg) {
-        this._showOptionPanel(false)
-        wx.navigateTo({
-          url: "/pages/pre-order/pre-order"
-        })
+      const product = this.data.product
+      if (product && id === product.id) {
+        const res = await productModel.checkStock(id, count).catch(() => {})
+        if (res) {
+          if (res.has_stock) {
+            product.count = count
+            this._showOptionPanel(false)
+            wx.navigateTo({
+              url: `/pages/pre-order/pre-order?product=${product}`
+            })
+          } else {
+            this._showToast('商品库存不足')
+            this.init()
+          }
+        }
       }
     },
 
@@ -137,7 +149,7 @@ Component({
         this._showToast('评论内容不能为空')
         return
       }
-      const res = await commentModel.add(this.data.product.id, content)
+      const res = await commentModel.add(this.data.product.id, content).catch(() => {})
       if (res) {
         this._showToast(res.msg)
         this.data.comments.unshift({ content, nums: 1 })

@@ -23,9 +23,9 @@ Component({
         let res = null
         const activeKey = this.data.activeKey
         if (activeKey === 'ALL') {
-          res = await orderModel.getPaginate(start)
+          res = await orderModel.getPaginate(start).catch(() => {})
         } else {
-          res = await orderModel.getPaginateByStatus(this.data.orderStatus[activeKey], start)
+          res = await orderModel.getPaginateByStatus(this.data.orderStatus[activeKey], start).catch(() => {})
         }
         if (res && res.models) {
           this._setMoreData(res.models)
@@ -87,9 +87,9 @@ Component({
       let res = null
       const activeKey = this.properties.activeKey
       if (activeKey === 'ALL') {
-        res = await orderModel.getPaginate()
+        res = await orderModel.getPaginate().catch(() => {})
       } else {
-        res = await orderModel.getPaginateByStatus(this.data.orderStatus[activeKey])
+        res = await orderModel.getPaginateByStatus(this.data.orderStatus[activeKey]).catch(() => {})
       }
       if (res && isNotEmptyArray(res.models)) {
         this._setMoreData(res.models)
@@ -108,7 +108,7 @@ Component({
 
     async cancelOrder(e) {
       const { id } = e.currentTarget.dataset
-      const res = await orderModel.cancel(id)
+      const res = await orderModel.cancel(id).catch(() => {})
       if (res && res.msg) {
         this._showToast(res.msg)
         this.getData()
@@ -117,7 +117,7 @@ Component({
 
     async confirmOrder(e) {
       const { id } = e.currentTarget.dataset
-      const res = await orderModel.confirm(id)
+      const res = await orderModel.confirm(id).catch(() => {})
       if (res && res.msg) {
         this._showToast(res.msg)
         this.getData()

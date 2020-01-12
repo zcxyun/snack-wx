@@ -16,9 +16,6 @@ class Comment extends Http {
         content,
       }
     })
-    if (res === this.authFail) {
-      return this.dealAuthFail()
-    }
     return res
   }
 }

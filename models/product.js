@@ -46,6 +46,13 @@ class Product extends Http {
       data,
     })
   }
+  checkStock(product_id, count) {
+    return this.request({
+      url: 'product/stock/check',
+      method: 'POST',
+      data: { product_id, count },
+    })
+  }
 }
 
 export default new Product()

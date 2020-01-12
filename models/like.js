@@ -6,9 +6,6 @@ class Like extends Http {
        url: `like/product/${id}`,
        method: 'PUT',
      })
-     if (res === this.authFail) {
-       return this.dealAuthFail()
-     }
      return res
    }
    async unlike(id) {
@@ -16,18 +13,13 @@ class Like extends Http {
       url: `like/cancel/product/${id}`,
       method: 'PUT',
     })
-    if (res === this.authFail) {
-      return this.dealAuthFail()
-    }
     return res
    }
    async getFavor(id) {
      const res = await this.request({
-        url: `like/info/product/${id}`
+        url: `like/info/product/${id}`,
+        loginRequired: false,
      })
-     if (res === this.authFail) {
-       return false
-     }
      return res
    }
  }

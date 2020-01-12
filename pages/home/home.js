@@ -29,23 +29,24 @@ Component({
       const categoriesPromise = categoryModel.getAllWithMiniImg()
       const themesPromise = themeModel.getAll()
       const productsPromise = productModel.getPaginate(0)
-
-      const bannerItems = await bannerItemsPromise
-      const categories = await categoriesPromise
-      const themes = await themesPromise
-      const res = await productsPromise
-      if (!res || !res.total) {
-        this._setNoResult(true)
-      } else {
-        this._setMoreDataBack(res.models)
-        this._setTotal(res.total)
-        wx.lin.renderWaterFlow(res.models, false)
-      }
-      this.setData({
-        bannerItems,
-        categories,
-        themes,
-      })
+      try {
+        const bannerItems = await bannerItemsPromise
+        const categories = await categoriesPromise
+        const themes = await themesPromise
+        const res = await productsPromise
+        if (res && res.total) {
+          this._setMoreDataBack(res.models)
+          this._setTotal(res.total)
+          wx.lin.renderWaterFlow(res.models, false)
+        } else {
+          this._setNoResult(true)
+        }
+        this.setData({
+          bannerItems: bannerItems || [],
+          categories: categories || [],
+          themes: themes || [],
+        })
+      } catch (err) {}
       this._loading(false)
     },
 
@@ -130,7 +131,7 @@ Component({
       }
       if (this._hasMore()) {
         this._lock(true)
-        const res = await productModel.getPaginate(this._getCurrentStart())
+        const res = await productModel.getPaginate(this._getCurrentStart()).catch(() => {})
         if (res && res.models) {
           this._setMoreDataBack(res.models)
           wx.lin.renderWaterFlow(res.models, false)

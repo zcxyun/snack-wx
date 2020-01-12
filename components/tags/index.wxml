@@ -3,7 +3,7 @@
   <block wx:for="{{texts}}" wx:key="content">
     <l-tag
       name="{{item.content || item}}"
-      bg-color="{{utils.highlight(index)}}"
+      bg-color="{{utils.highlightTags(index)}}"
       font-color="#666"
       bind:lintap="onTag"
     >

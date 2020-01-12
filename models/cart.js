@@ -13,10 +13,7 @@ class Cart extends Http {
         return cart
       }
     }
-    cart = await this.request({ url: 'cart/products' })
-    if (cart === this.authFail) {
-      return this.dealAuthFail()
-    }
+    cart = await this.request({ url: 'cart/products'})
     if (cart) {
       this.setCartToStorage(cart)
       app.state.refreshCartStorage = false
@@ -26,11 +23,9 @@ class Cart extends Http {
 
   async getTotalCount() {
     const res = await this.request({
-      url: 'cart/products/count'
+      url: 'cart/products/count',
+      loginRequired: false,
     })
-    if (res === this.authFail) {
-      return 0
-    }
     return res
   }
 
@@ -40,9 +35,6 @@ class Cart extends Http {
       method: 'POST',
       data: { product_id, count, selected }
     })
-    if (res === this.authFail) {
-      return this.dealAuthFail()
-    }
     if (res) {
       app.state.refreshCartStorage = true
     }
@@ -72,9 +64,6 @@ class Cart extends Http {
       method: 'POST',
       data: defineData,
     })
-    if (res === this.authFail) {
-      return this.dealAuthFail()
-    }
     if (res) {
       this.setCartToStorage(data)
     }
@@ -86,9 +75,6 @@ class Cart extends Http {
       url: 'cart',
       method: 'DELETE'
     })
-    if (res === this.authFail) {
-      return this.dealAuthFail()
-    }
     if (res) {
       this.setCartToStorage([])
     }

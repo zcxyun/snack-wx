@@ -28,14 +28,14 @@ Component({
       const id = this.properties.id
       const productsPromise = productModel.getPaginateByTheme(id)
       const themePromise = themeModel.get(id)
-      const res = await productsPromise
+      const res = await productsPromise.catch(() => {})
       if (res) {
         this._setMoreData(res.models)
         this._setTotal(res.total)
       } else {
         this._setNoResult(true)
       }
-      const theme = await themePromise
+      const theme = await themePromise.catch(() => {})
       if (theme) {
         this.setData({
           headerImg: theme.head_img
@@ -96,7 +96,7 @@ Component({
         this._lock(true)
         const id = this.properties.id
         const start = this._getCurrentStart()
-        const res = await productModel.getPaginateByTheme(id, start)
+        const res = await productModel.getPaginateByTheme(id, start).catch(() => {})
         if (res && res.models) {
           this._setMoreData(res.models)
         }

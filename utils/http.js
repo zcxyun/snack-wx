@@ -7,23 +7,21 @@ import {
 } from '../utils/util.js'
 
 export default class Http {
-  authFail = Symbol('authFail')
 
-  async request({url, method='GET', data={}, refetch=true}) {
-    const that = this
+  async request({url, method='GET', data={}, refetch=true, showErr=true, loginRequired=true}) {
     const header = this.getHeader(url)
     const curl = config.api_base_url + url
     const reqOriginConfig = { url, method, data, header }
     const reqConfig = { url:curl, method, data, header }
-    const res = await promisic(wx.request)(reqConfig).catch(err => {
-      that.showToast('对不起, 网络中断或服务器错误')
+    const res = await promisic(wx.request)(reqConfig).catch(() => {
+      this._showToast('对不起, 网络中断或服务器错误')
     })
     if (res) {
-      return await this.dealRes(res, reqOriginConfig, refetch)
+      return await this.dealRes(res, reqOriginConfig, refetch, showErr, loginRequired)
     }
   }
 
-  async dealRes(res, reqOriginConfig, refetch) {
+  async dealRes(res, reqOriginConfig, refetch, showErr, loginRequired) {
     const statusCode = res.statusCode.toString()
     if (statusCode.startsWith('2')) {
       return res.data
@@ -34,8 +32,10 @@ export default class Http {
       // 10100 refresh token 获取失败 10000 认证失败
       if (error_code === 10100 || error_code === 10000) {
         // 需要重新登录
-        // return this.dealAuthFail()
-        return this.authFail
+        if (loginRequired) {
+          return this.dealAuthFail()
+        }
+        return
       }
       // 10040 令牌失效 10050 令牌过期
       if (error_code === 10040 || error_code === 10050) {
@@ -48,7 +48,10 @@ export default class Http {
           return await this.request({ ...reqOriginConfig, refetch: false })
         }
       }
-      this.showToast(errMsg)
+      if (showErr) {
+        this._showToast(errMsg)
+      }
+      return await Promise.reject(res.data)
     }
   }
 
@@ -62,25 +65,22 @@ export default class Http {
             url: '/pages/login/login'
           })
         }
-        // else if (res.cancel) {
-        //   wx.switchTab({
-        //     url: '/pages/home/home'
-        //   })
-        // }
       }
     })
-    return false
   }
 
   async refreshToken() {
-    const tokens = await this.request({
-      url: 'token/refresh'
-    })
-    if (tokens) {
-      setTokensToStorage(tokens.access_token, tokens.refresh_token)
-      return true
+    try {
+      const tokens = await this.request({
+        url: 'token/refresh'
+      })
+      if (tokens) {
+        setTokensToStorage(tokens.access_token, tokens.refresh_token)
+        return true
+      }
+    } catch (error) {
+      return false
     }
-    return false
   }
 
   getErrMsg(msg) {
@@ -113,7 +113,7 @@ export default class Http {
     return header
   }
 
-  showToast(content) {
+  _showToast(content) {
     wx.showToast({
       title: content,
       icon: 'none'

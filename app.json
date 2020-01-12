@@ -12,13 +12,14 @@
     "pages/order/order",
     "pages/order-list/order-list",
     "pages/pay-result/pay-result",
-    "pages/login/login"
+    "pages/login/login",
+    "pages/like-products/like-products"
   ],
   "window": {
     "backgroundTextStyle": "light",
     "backgroundColor": "#ffffff",
     "navigationBarBackgroundColor": "#ffffff",
-    "navigationBarTitleText": "",
+    "navigationBarTitleText": "七月小吃店",
     "navigationBarTextStyle": "black",
     "enablePullDownRefresh": true
   },

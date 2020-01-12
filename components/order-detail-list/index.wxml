@@ -7,7 +7,7 @@
         <l-price l-class="price" value="{{product.price_str}}" color="#000" size="30" bold="600"></l-price>
         <l-price l-class="old-price" value="{{product.old_price_str}}" deleted color="#999" size="25" wx:if="{{product.old_price_str !== product.price_str}}"></l-price>
         <view class="product-count-box">
-          <l-icon name="close" size="17" bold="600" color="#000" />
+          <l-icon name="close" size="15" bold="600" color="#000" />
           <text class="product-count">{{product.count}}</text>
         </view>
       </view>

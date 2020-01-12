@@ -6,5 +6,6 @@
     "l-loadmore": "/dist/loadmore/index",
     "l-status-show": "/dist/status-show/index",
     "z-product": "/components/product/index"
-  }
+  },
+  "navigationBarTitleText": "分类列表"
 }

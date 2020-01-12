@@ -119,10 +119,9 @@ Component({
         const res = await productModel.checkStock(id, count).catch(() => {})
         if (res) {
           if (res.has_stock) {
-            product.count = count
             this._showOptionPanel(false)
             wx.navigateTo({
-              url: `/pages/pre-order/pre-order?product=${product}`
+              url: `/pages/pre-order/pre-order?id=${id}&count=${count}`
             })
           } else {
             this._showToast('商品库存不足')

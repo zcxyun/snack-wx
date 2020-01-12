@@ -1,0 +1,9 @@
+/* pages/products/products.wxss */
+
+.products-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-sizing: border-box;
+  padding-top: 30rpx;
+}

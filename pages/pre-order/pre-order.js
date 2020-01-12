@@ -1,13 +1,12 @@
 import cartModel from "../../models/cart.js";
 import orderModel from "../../models/order.js";
+import productModel from "../../models/product.js"
 import { num2money, isNotEmptyArray } from '../../utils/util.js'
 
 Component({
   properties: {
-    product: {
-      type: Object,
-      value: null,
-    },
+    id: Number,
+    count: Number,
   },
 
   data: {
@@ -27,13 +26,17 @@ Component({
 
     async init () {
       let products = null
-      const product = this.properties.product
-      this.data.fromCart = product === null
-      // 如果product有值来自立即购买, 否则来自购物车
+      const id = this.properties.id
+      const count = this.properties.count
+      this.data.fromCart = !id && !count
       if (this.data.fromCart) {
         products = await cartModel.getProducts().catch(() => {})
       } else {
-        products = [product]
+        const product = await productModel.getForPreOrder(id).catch(() => {})
+        if (product) {
+          product.count = count
+          products = [product]
+        }
       }
       if (isNotEmptyArray(products)) {
         this.computeTotal(products)

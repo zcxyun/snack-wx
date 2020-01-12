@@ -9,6 +9,12 @@ class Product extends Http {
     })
   }
 
+  getForPreOrder(id) {
+    return this.request({
+      url: `product/${id}/for/pre_order`
+    })
+  }
+
   getPaginate(start = 0, count = config.pageSize) {
     const page = start / count
     const data = {page, count}

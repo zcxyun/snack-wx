@@ -3,5 +3,6 @@
   "usingComponents": {
     "z-category-products": "/components/category-products-tab/index",
     "l-loading": "/dist/loading/index"
-  }
+  },
+  "navigationBarTitleText": "分类"
 }

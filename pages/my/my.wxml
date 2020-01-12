@@ -8,11 +8,6 @@
       shape="squre"
       src="{{memberInfo.avatarUrl}}"
       l-text-class="avatar-text" />
-    <!-- <l-button
-      wx:else
-      special="{{true}}"
-      open-type="getUserInfo"
-      bind:getuserinfo="onGetUserInfo"> -->
       <l-avatar
         wx:else
         bind:lintap="login"
@@ -23,7 +18,6 @@
         shape="squre"
         icon-color="#2c61b4"
         l-text-class="avatar-text" />
-    <!-- </l-button> -->
   </view>
   <view class="header-box">
     <view class="header">
@@ -33,7 +27,7 @@
       </view>
       <view class="separator"></view>
       <view class="info-box">
-        <text class="like-num">12</text>
+        <text class="like-num">{{likeCount}}</text>
         <text class="header-text">点赞</text>
       </view>
     </view>
@@ -49,11 +43,9 @@
     </view>
   </view>
   <view class="menu-list">
-    <l-list title="全部订单" icon="order" bind:lintap="onAllOrder" badge-count="8" badge-position="right" badge-max-count="99" />
+    <l-list title="全部订单" icon="order" bind:lintap="onAllOrder" />
     <l-list title="收货地址" icon="address" bind:lintap="onAddress" />
     <l-list title="全部点赞" icon="like" bind:lintap="onLike"  />
-    <!-- <l-list title="评论" icon="comment" bind:lintap="onComment"  /> -->
-    <!-- <l-list title="消息" icon="notification" bind:lintap="onMessage" badge-count="99"  badge-position="right" badge-max-count="99" /> -->
   </view>
   <l-dialog show="{{showSettingDialog}}" type="confirm" title="授权"
     content="请先授权我们获取您的收货地址" bind:linconfirm="onConfirm" />

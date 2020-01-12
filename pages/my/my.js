@@ -1,12 +1,14 @@
 import { promisic } from "../../utils/util.js"
 import memberModel from '../../models/member.js'
 import addressModel from "../../models/address.js"
+import likeModel from "../../models/like.js"
 
 Component({
   data: {
     authorized: false,
     memberInfo: {},
     showSettingDialog: false,
+    likeCount: 0,
     orderMenu: [{
       name: '待付款',
       key: 'UNPAID',
@@ -23,6 +25,13 @@ Component({
   },
   methods: {
     onLoad: function () {
+    },
+
+    async init () {
+      const res = await likeModel.getLikeCount().catch(() => {})
+      if (res && res.like_count >= 0) {
+        this.setData({ likeCount: res.like_count })
+      }
     },
 
     async userAuthorized() {
@@ -77,6 +86,12 @@ Component({
       })
     },
 
+    onLike() {
+      wx.navigateTo({
+        url: "/pages/like-products/like-products"
+      })
+    },
+
     login() {
       wx.navigateTo({
         url: '/pages/login/login'
@@ -106,6 +121,7 @@ Component({
      */
     onShow: function () {
       this.userAuthorized()
+      this.init()
     },
 
     /**

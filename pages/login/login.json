@@ -2,5 +2,6 @@
   "component": true,
   "usingComponents": {
     "l-button": "/dist/button/index"
-  }
+  },
+  "navigationBarTitleText": "登录"
 }

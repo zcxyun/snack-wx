@@ -2,5 +2,6 @@
   "component": true,
   "usingComponents": {
     "z-order-list-segment": "/components/order-list-segment/index"
-  }
+  },
+  "navigationBarTitleText": "订单列表"
 }

@@ -6,5 +6,6 @@
     "l-status-show": "/dist/status-show/index",
     "l-slide-view": "/dist/slide-view/index",
     "l-loading": "/dist/loading/index"
-  }
+  },
+  "navigationBarTitleText": "购物车"
 }

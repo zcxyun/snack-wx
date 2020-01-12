@@ -12,5 +12,6 @@
     "l-segment": "/dist/segment/index",
     "l-segment-item": "/dist/segment-item/index",
     "l-status-show": "/dist/status-show/index"
-  }
+  },
+  "navigationBarTitleText": "商品详情"
 }

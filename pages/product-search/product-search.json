@@ -1,5 +1,6 @@
 {
   "usingComponents": {
     "z-product-search": "/components/product-search/index"
-  }
+  },
+  "navigationBarTitleText": "搜索商品"
 }

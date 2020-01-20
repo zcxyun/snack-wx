@@ -1,6 +1,8 @@
 <view class="container">
   <z-address />
+  <z-line />
   <z-order-detail-list products="{{products}}" />
+  <z-line />
   <z-order-detail-total
     totalPrice="{{totalPrice}}" oldTotalPrice="{{oldTotalPrice}}"
     discountPrice="{{discountPrice}}" totalCount="{{totalCount}}"

@@ -103,6 +103,9 @@ export default Behavior({
         if (timeType !== 'second') {
           countDownTime = typeof time === 'string' ? countDownTime.replace(/-/g, '/') : countDownTime;
           countDownTime = Math.ceil((new Date(countDownTime).getTime() - new Date().getTime()) / 1000);
+          // let arr = countDownTime.split(/[/ :]/);
+          // let nndate = new Date(arr[0], arr[1] - 1, arr[2], arr[3], arr[4], arr[5]);
+          // countDownTime = ((Date.parse(nndate) - new Date().getTime()) / 1000);
         }
 
         if (countDownTime < 0 && timeType !== 'second') {

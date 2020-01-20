@@ -21,7 +21,7 @@
     "navigationBarBackgroundColor": "#ffffff",
     "navigationBarTitleText": "七月小吃店",
     "navigationBarTextStyle": "black",
-    "enablePullDownRefresh": true
+    "enablePullDownRefresh": false
   },
   "tabBar": {
     "backgroundColor": "#F5F5F5",

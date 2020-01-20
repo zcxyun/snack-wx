@@ -10,6 +10,7 @@
     "l-loading": "/dist/loading/index",
     "l-loadmore": "/dist/loadmore/index",
     "l-tag": "/dist/tag/index",
-    "l-countdown": "/dist/countdown/index"
+    "l-countdown": "/dist/countdown/index",
+    "l-dialog": "/dist/dialog/index"
   }
 }

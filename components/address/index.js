@@ -6,6 +6,7 @@ Component({
    * 组件的属性列表
    */
   properties: {
+    address: Object,
     readOnly: {
       type: Boolean,
       value: false,
@@ -16,15 +17,17 @@ Component({
    * 组件的初始数据
    */
   data: {
-    address: null,
     showSettingDialog: false,
   },
 
   lifetimes: {
     async attached() {
-      const address = await addressModel.get().catch(() => {})
-      if (address) {
-        this.setData({ address })
+      let address = this.properties.address
+      if (!address) {
+        address = await addressModel.get().catch(() => {})
+        if (address) {
+          this.setData({ address })
+        }
       }
     }
   },

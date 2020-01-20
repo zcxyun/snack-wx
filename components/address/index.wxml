@@ -1,7 +1,7 @@
 <view class="address-container">
   <l-dialog show="{{showSettingDialog}}" type="confirm" title="授权" content="请先授权我们获取您的收货地址" bind:linconfirm="onConfirm" />
   <view class="address-box" bind:tap="onAddress">
-    <view class="address-icon">
+    <view class="address-icon" >
       <l-icon name="address" />
     </view>
     <view class="address" wx:if="{{!address}}">请选择收货地址</view>

@@ -6,6 +6,10 @@ Component({
   properties: {
     totalPrice: String,
     commitText: String,
+    commitBtnDisabled: {
+      type: Boolean,
+      value: false,
+    },
   },
 
   /**
@@ -20,7 +24,9 @@ Component({
    */
   methods: {
     submit() {
-      this.triggerEvent('submit')
+      if (!this.properties.commitBtnDisabled) {
+        this.triggerEvent('submit')
+      }
     }
   }
 })

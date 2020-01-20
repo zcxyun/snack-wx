@@ -18,6 +18,13 @@ class Token extends Http {
     return null
   }
 
+  verify() {
+    return this.request({
+      url: 'token/verify',
+      method: 'POST',
+    })
+  }
+
   // 放入Http.js 中防止循环导入
   // async refreshToken() {
   //   const accessToken = await this.request({

@@ -1,5 +1,4 @@
 .products-box {
-  margin-top: 20rpx;
   background: #fff;
   display: flex;
   width: 100vw;

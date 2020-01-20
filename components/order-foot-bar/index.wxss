@@ -20,9 +20,17 @@
 }
 
 .commit {
-  background: #F56C6C;
   color: #fff;
   width: 200rpx;
   line-height: 80rpx;
   text-align: center;
 }
+
+.background-red {
+  background: #F56C6C;
+}
+
+.background-gray {
+  background: #999;
+}
+

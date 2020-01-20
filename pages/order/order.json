@@ -4,7 +4,10 @@
     "z-address": "/components/address/index",
     "z-order-detail-list": "/components/order-detail-list/index",
     "z-order-detail-total": "/components/order-detail-total/index",
-    "z-order-foot-bar": "/components/order-foot-bar/index"
+    "z-order-foot-bar": "/components/order-foot-bar/index",
+    "z-line": "/components/line/index",
+    "l-tag": "/dist/tag/index",
+    "l-dialog": "/dist/dialog/index"
   },
   "navigationBarTitleText": "订单详情"
 }

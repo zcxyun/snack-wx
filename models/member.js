@@ -10,7 +10,8 @@ class Member extends Http {
       return memberInfo
     }
     memberInfo = await this.request({
-      url: 'member/get'
+      url: 'member/get',
+      loginRequired: false,
     })
     if (memberInfo) {
       this.setMemberInfoToStorage(memberInfo)
@@ -28,6 +29,7 @@ class Member extends Http {
         url: 'member/update',
         method: 'POST',
         data: userInfo,
+        loginRequired: false,
       })
       if (res) {
         this.setMemberInfoToStorage(userInfo)

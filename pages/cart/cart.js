@@ -194,7 +194,9 @@ Component({
      * 生命周期函数--监听页面隐藏
      */
     async onHide() {
-      await cartModel.editAll(this.data.products).catch(() => {})
+      if (isNotEmptyArray(this.data.products)) {
+        await cartModel.editAll(this.data.products).catch(() => {})
+      }
     },
 
     /**

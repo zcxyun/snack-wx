@@ -13,16 +13,16 @@ Component({
 
   methods: {
     onLoad: function () {
-      this.init()
     },
 
     async init () {
       this._loading(true)
+      this._initPaginate()
       const res = await likeModel.getLikeProducts().catch(() => {})
       if (res && res.models) {
         this._setMoreDataBack(res.models)
         this._setTotal(res.total)
-        wx.lin.renderWaterFlow(res.models, false)
+        wx.lin.renderWaterFlow(this.data.dataArray, true)
       } else {
         this._setNoResult(true)
       }
@@ -44,7 +44,7 @@ Component({
      * 生命周期函数--监听页面显示
      */
     onShow: function () {
-
+      this.init()
     },
 
     /**

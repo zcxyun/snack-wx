@@ -15,8 +15,15 @@ const formatNumber = n => {
   return n[1] ? n : '0' + n
 }
 
+const dateStrAddSeconds = function (datetimestr, seconds) {
+  const date = new Date(datetimestr);
+  const addSeconds = date.getSeconds() + seconds
+  date.setSeconds(addSeconds)
+  return formatTime(date)
+}
+
 // 判断类型
-function type(obj) {
+const type = function (obj) {
   const { toString } = Object.prototype
   const map = {
     '[object Boolean]': 'boolean',
@@ -139,6 +146,7 @@ const getLoginStatusOfStorage = function() {
 }
 
 export {
+  dateStrAddSeconds,
   type,
   isObjEqual,
   isArrEqual,

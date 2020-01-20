@@ -2,6 +2,7 @@ import productModel from "../../models/product.js";
 import commentModel from "../../models/comment.js"
 import likeModel from "../../models/like.js"
 import cartModel from "../../models/cart.js"
+import tokenModel from "../../models/token.js"
 
 Component({
 
@@ -73,13 +74,19 @@ Component({
       const { isLike } = e.detail
       const id = this.data.product.id
       let res = null
-      if (isLike) {
-        res = await likeModel.like(id).catch(() => {})
-      } else {
-        res = await likeModel.unlike(id).catch(() => {})
-      }
-      if (res && res.msg) {
-        this._showToast(res.msg)
+      try {
+        if (isLike) {
+          res = await likeModel.like(id)
+        } else {
+          res = await likeModel.unlike(id)
+        }
+        if (res && res.msg) {
+          this._showToast(res.msg)
+        } else {
+          this.setData({ likeStatus: false, likeCount: 0 })
+        }
+      } catch (error) {
+        this.setData({ likeStatus: false, likeCount: 0 })
       }
     },
 
@@ -114,6 +121,10 @@ Component({
 
     async onNowBuy(e) {
       const { id, count } = e.detail
+      const verify = await tokenModel.verify().catch(() => {})
+      if (!verify) {
+        return
+      }
       const product = this.data.product
       if (product && id === product.id) {
         const res = await productModel.checkStock(id, count).catch(() => {})

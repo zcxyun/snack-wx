@@ -9,7 +9,7 @@ class Address extends Http {
     if (address) {
       return address
     }
-    address = await this.request({ url: 'address' })
+    address = await this.request({ url: 'address', loginRequired: false })
     if (address) {
       this._setAddressToStorage(address)
     }

@@ -1,5 +1,5 @@
 import orderModel from "../../models/order.js";
-import { isNotEmptyArray } from "../../utils/util.js"
+import { isNotEmptyArray, dateStrAddSeconds } from "../../utils/util.js"
 import paginate from "../../behaviors/paginate.js"
 
 Component({
@@ -66,6 +66,12 @@ Component({
 
   lifetimes: {
     attached() {
+      // this.init()
+    },
+  },
+
+  pageLifetimes: {
+    show () {
       this.init()
     },
   },
@@ -92,6 +98,10 @@ Component({
         res = await orderModel.getPaginateByStatus(this.data.orderStatus[activeKey]).catch(() => {})
       }
       if (res && isNotEmptyArray(res.models)) {
+        res.models.forEach(order => {
+          order.deadline = dateStrAddSeconds(order.create_time, 1800 * 2)
+        })
+        console.log(res.models)
         this._setMoreData(res.models)
         this._setTotal(res.total)
       } else {
@@ -108,24 +118,54 @@ Component({
 
     async cancelOrder(e) {
       const { id } = e.currentTarget.dataset
-      const res = await orderModel.cancel(id).catch(() => {})
-      if (res && res.msg) {
-        this._showToast(res.msg)
-        this.getData()
-      }
+      wx.lin.showDialog({
+        type: "confirm",
+        title: "提示",
+        content: "确认取消订单吗?",
+        success: async (res) => {
+          if (res.confirm) {
+            const res = await orderModel.cancel(id).catch(() => {})
+            if (res && res.msg) {
+              this._showToast('取消订单成功')
+              this.getData()
+            }
+          }
+        }
+      })
     },
 
     async confirmOrder(e) {
       const { id } = e.currentTarget.dataset
-      const res = await orderModel.confirm(id).catch(() => {})
+      wx.lin.showDialog({
+        type: "confirm",
+        title: "提示",
+        content: "确认商品已收到吗?",
+        success: async (res) => {
+          if (res.confirm) {
+            const res = await orderModel.confirm(id).catch(() => {})
+            if (res && res.msg) {
+              this._showToast('确认收货成功')
+              this.getData()
+            }
+          }
+        }
+      })
+    },
+
+    async countDownEnd(e) {
+      const { id } = e.currentTarget.dataset
+      const res = await orderModel.cancel(id).catch(() => {})
       if (res && res.msg) {
-        this._showToast(res.msg)
+        this._showToast('取消订单成功')
         this.getData()
       }
     },
 
-    async countDownEnd(e) {
-      this.cancelOrder(e)
+    onOrderCard (e) {
+      const { id } = e.currentTarget.dataset
+      wx.navigateTo({
+        url: `/pages/order/order?id=${id}`
+      })
     },
 
     _loading(loading) {

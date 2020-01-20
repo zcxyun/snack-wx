@@ -1,6 +1,26 @@
 <view class="container">
-  <z-address />
-  <z-order-detail-list products="{{products}}" />
-  <z-order-detail-total totalPrice="{{totalPrice}}" oldTotalPrice="{{oldTotalPrice}}" discountPrice="{{discountPrice}}" totalCount="{{totalCount}}" />
-  <z-order-foot-bar totalPrice="{{totalPrice}}" commitText="{{commitText}}" bind:submit="submit" />
+  <z-address read-only="{{true}}" address="{{order.snap_address}}" />
+  <z-line />
+  <view class="header">
+    <text>订单编号: {{order.order_no}}</text>
+    <view class="header-item">
+      <text>下单时间: {{order.create_time}}</text>
+      <l-tag plain font-color="#f56c6c" shape="circle" size="mini">{{currentOrderStatus}}</l-tag>
+    </view>
+  </view>
+  <z-line />
+  <z-order-detail-list products="{{order.snap_products}}" />
+  <z-line />
+  <z-order-detail-total
+    totalPrice="{{order.total_price_str}}"
+    oldTotalPrice="{{order.old_total_price_str}}"
+    discountPrice="{{order.discountPrice}}"
+    totalCount="{{order.total_count}}" />
+  <z-order-foot-bar
+    wx:if="{{order.order_status === orderStatus.UNPAID || order.order_status === orderStatus.UNRECEIPTED}}"
+    totalPrice="{{order.total_price_str}}"
+    commitText="{{commitText}}"
+    commitBtnDisabled="{{commitBtnDisabled}}"
+    bind:submit="submit" />
+  <l-dialog />
 </view>

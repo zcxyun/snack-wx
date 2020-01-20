@@ -3,5 +3,5 @@
     <text class="left-title">合计:</text>
     <l-price value="{{totalPrice}}" color="#000" size="30" bold="600"></l-price>
   </view>
-  <view class="commit" bind:tap="submit">{{commitText}}</view>
+  <view class="commit {{commitBtnDisabled ? 'background-gray' : 'background-red'}}" bind:tap="submit">{{commitText}}</view>
 </view>

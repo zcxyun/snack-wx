@@ -30,12 +30,19 @@ class Order extends Http {
     })
   }
 
+  get(id) {
+    return this.request({
+      url: `order/${id}`
+    })
+  }
+
   getPaginate(start = 0, count = config.orderPageSize) {
     const page = start / count
     const data = { page, count }
     return this.request({
       url: 'order/paginate',
       data,
+      showErr: false,
     })
   }
 
@@ -45,6 +52,7 @@ class Order extends Http {
     return this.request({
       url: `order/paginate/status/${status}`,
       data,
+      showErr: false,
     })
   }
 }

@@ -3,5 +3,6 @@
   "usingComponents": {
     "z-order-list-segment": "/components/order-list-segment/index"
   },
-  "navigationBarTitleText": "订单列表"
+  "navigationBarTitleText": "订单列表",
+  "enablePullDownRefresh": false
 }

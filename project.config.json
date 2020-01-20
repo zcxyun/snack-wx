@@ -11,6 +11,7 @@
 		"minified": true,
 		"newFeature": true,
 		"coverView": true,
+		"nodeModules": true,
 		"autoAudits": false,
 		"checkInvalidKey": true,
 		"checkSiteMap": false,
@@ -19,11 +20,10 @@
 			"ignore": [],
 			"disablePlugins": [],
 			"outputPath": ""
-		},
-		"nodeModules": true
+		}
 	},
 	"compileType": "miniprogram",
-	"libVersion": "2.9.4",
+	"libVersion": "2.10.0",
 	"appid": "wxfdcf36f2bf5d2af2",
 	"projectname": "snack-wx",
 	"cloudfunctionTemplateRoot": "",
@@ -106,16 +106,30 @@
 					"scene": null
 				},
 				{
-					"id": -1,
+					"id": 7,
 					"name": "pages/pre-order/pre-order",
 					"pathName": "pages/pre-order/pre-order",
-					"query": "id=1",
+					"query": "",
 					"scene": null
 				},
 				{
 					"id": -1,
 					"name": "pages/order-list/order-list",
 					"pathName": "pages/order-list/order-list",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": 9,
+					"name": "pages/order/order",
+					"pathName": "pages/order/order",
+					"query": "id=17",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/like-products/like-products",
+					"pathName": "pages/like-products/like-products",
 					"query": "",
 					"scene": null
 				}

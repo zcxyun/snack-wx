@@ -13,7 +13,7 @@ class Cart extends Http {
         return cart
       }
     }
-    cart = await this.request({ url: 'cart/products'})
+    cart = await this.request({ url: 'cart/products', loginRequired: false })
     if (cart) {
       this.setCartToStorage(cart)
       app.state.refreshCartStorage = false

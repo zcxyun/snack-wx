@@ -18,13 +18,14 @@
         <view class="countdown-box" wx:if="{{order.order_status === orderStatus.UNPAID}}">
           <text class="countdown-text">请在倒计时结束前付款:</text>
           <l-countdown l-class-time="countdown-blue" l-class="countdown-text"
-            time="{{utils.dateStrAddSeconds(order.create_time, 180)}}"
+            time="{{utils.dateStrAddSeconds(order.create_time, 1800)}}"
             time-type="datetime" format="{%m}分:{%s}秒"
             data-id="{{order.id}}" bind:linend="countDownEnd" />
         </view>
       </view>
       <l-card image="{{order.snap_img}}" title="{{order.snap_name}}" full
-        l-class="card" l-img-class="card-img" l-title-class="card-title">
+        l-class="card" l-img-class="card-img" l-title-class="card-title"
+        bind:tap="onOrderCard" data-id="{{order.id}}">
         <view class="card-content">
           <text>总数量: {{order.total_count}}</text>
           <l-tag plain font-color="#f56c6c" shape="circle" size="mini">
@@ -57,3 +58,4 @@
   <view slot="content" style="height: 600rpx; width:100%"></view>
 </l-loading>
 <l-status-show show="{{noResult}}" type="order" />
+<l-dialog />

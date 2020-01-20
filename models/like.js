@@ -26,7 +26,8 @@ class Like extends Http {
   }
   getLikeCount() {
     return this.request({
-      url: 'like/count'
+      url: 'like/count',
+      loginRequired: false,
     })
   }
   getLikeProducts(start = 0, count = config.pageSize) {

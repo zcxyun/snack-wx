@@ -2,3 +2,23 @@
   background: #f2f2f2;
   min-height: 100vh;
 }
+
+.header {
+  display: flex;
+  flex-direction: column;
+  padding: 10rpx 30rpx;
+  font-size: 28rpx;
+  background: #fff;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.header-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header > text {
+  line-height: 50rpx;
+}

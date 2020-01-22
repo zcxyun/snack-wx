@@ -1,5 +1,7 @@
 {
   "component": true,
-  "usingComponents": {},
+  "usingComponents": {
+    "l-status-show": "/dist/status-show/index"
+  },
   "navigationBarTitleText": "支付结果"
 }

@@ -154,7 +154,12 @@ Component({
 
     async settleAccount() {
       const res = await cartModel.editAll(this.data.products).catch(() => {})
-      if (res) {
+      const hasData = this.data.products.some(item => item.selected)
+      if (!hasData) {
+        this._showToast('请选择要下单的商品')
+        return
+      }
+      if (res && hasData) {
         wx.navigateTo({
           url: '/pages/pre-order/pre-order'
         })

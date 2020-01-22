@@ -50,6 +50,17 @@ Component({
       const orderStatus = this.data.orderStatus
       if (order.order_status === orderStatus.UNPAID) {
         this._showToast('此小程序用于测试, 不能支付')
+        // const res = await orderModel.pay(order.id).catch(() => { })
+        // if (res) {
+        //   this.setData({
+        //     commitBtnDisabled: true,
+        //     commitText: '已付款',
+        //     currentOrderStatus: '待发货',
+        //   })
+        //   wx.navigateTo({
+        //     url: '/pages/pay-result/pay-result'
+        //   })
+        // }
       } else if (order.order_status === orderStatus.UNRECEIPTED) {
         wx.lin.showDialog({
           type: "confirm",

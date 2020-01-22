@@ -1,5 +1,5 @@
 import orderModel from "../../models/order.js";
-import { isNotEmptyArray, dateStrAddSeconds } from "../../utils/util.js"
+import { isNotEmptyArray, dateStrAddSeconds, promisic } from "../../utils/util.js"
 import paginate from "../../behaviors/paginate.js"
 
 Component({
@@ -98,9 +98,9 @@ Component({
         res = await orderModel.getPaginateByStatus(this.data.orderStatus[activeKey]).catch(() => {})
       }
       if (res && isNotEmptyArray(res.models)) {
-        res.models.forEach(order => {
-          order.deadline = dateStrAddSeconds(order.create_time, 1800 * 2)
-        })
+        // res.models.forEach(order => {
+        //   order.deadline = dateStrAddSeconds(order.create_time, 1800 * 2)
+        // })
         console.log(res.models)
         this._setMoreData(res.models)
         this._setTotal(res.total)
@@ -110,10 +110,16 @@ Component({
       this._loading(false)
     },
 
-    payOrder(e) {
+    async payOrder(e) {
       const { id } = e.currentTarget.dataset
       this._showToast('此小程序用于测试, 不能支付')
-
+      return
+      const res = await orderModel.pay(id).catch(() => {})
+      if (res) {
+        wx.navigateTo({
+          url: '/pages/pay-result/pay-result'
+        })
+      }
     },
 
     async cancelOrder(e) {

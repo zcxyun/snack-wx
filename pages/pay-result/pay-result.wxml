@@ -1,2 +1,1 @@
-<!--pages/pay-result/pay-result.wxml-->
-<text>pages/pay-result/pay-result.wxml</text>
+<l-status-show show="{{true}}" type="success" button-text="查看订单" />

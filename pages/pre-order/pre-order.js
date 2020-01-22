@@ -31,6 +31,8 @@ Component({
       this.data.fromCart = !id && !count
       if (this.data.fromCart) {
         products = await cartModel.getProducts().catch(() => {})
+        products = products.filter(product => product.selected)
+        console.log(products)
       } else {
         const product = await productModel.getForPreOrder(id).catch(() => {})
         if (product) {

@@ -7,7 +7,7 @@ Component({
    * 页面的初始数据
    */
   data: {
-
+    loading: false,
   },
 
   methods: {
@@ -25,9 +25,9 @@ Component({
         if (userInfo) {
           const { code } = await promisic(wx.login)()
           if (code) {
+            this._loading(true)
             const res = await tokenModel.getTokens({ code, ...userInfo })
             if (res) {
-              this._showToast('登录成功')
               wx.navigateBack()
             }
           }
@@ -37,11 +37,8 @@ Component({
       }
     },
 
-    _showToast(text) {
-      wx.showToast({
-        title: text,
-        icon: 'none',
-      })
+    _loading(loading) {
+      this.setData({ loading })
     },
 
     /**

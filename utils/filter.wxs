@@ -21,20 +21,21 @@ var formatTime = function (date) {
   var hour = date.getHours();
   var minute = date.getMinutes();
   var second = date.getSeconds();
-
-  return [year, month, day].map(formatNumber).join('/') + ' ' + [hour, minute, second].map(formatNumber).join(':')
+  var res = [year, month, day].map(formatNumber).join('/') + ' ' + [hour, minute, second].map(formatNumber).join(':');
+  return res;
 }
 
 var formatNumber = function (n) {
   n = n.toString();
-  return n[1] ? n : '0' + n
+  return n[1] ? n : '0' + n;
 }
 
 var dateStrAddSeconds = function (datetimestr, seconds) {
   var date = getDate(datetimestr);
-  var addSeconds = date.getSeconds() + seconds
-  date.setSeconds(addSeconds)
-  return formatTime(date)
+  var addSeconds = date.getSeconds() + seconds;
+  date.setSeconds(addSeconds);
+  var res = formatTime(date);
+  return res;
 }
 
 module.exports = {

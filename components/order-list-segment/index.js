@@ -98,10 +98,6 @@ Component({
         res = await orderModel.getPaginateByStatus(this.data.orderStatus[activeKey]).catch(() => {})
       }
       if (res && isNotEmptyArray(res.models)) {
-        // res.models.forEach(order => {
-        //   order.deadline = dateStrAddSeconds(order.create_time, 1800 * 2)
-        // })
-        console.log(res.models)
         this._setMoreData(res.models)
         this._setTotal(res.total)
       } else {
@@ -114,12 +110,12 @@ Component({
       const { id } = e.currentTarget.dataset
       this._showToast('此小程序用于测试, 不能支付')
       return
-      const res = await orderModel.pay(id).catch(() => {})
-      if (res) {
-        wx.navigateTo({
-          url: '/pages/pay-result/pay-result'
-        })
-      }
+      // const res = await orderModel.pay(id).catch(() => {})
+      // if (res) {
+      //   wx.navigateTo({
+      //     url: '/pages/pay-result/pay-result'
+      //   })
+      // }
     },
 
     async cancelOrder(e) {

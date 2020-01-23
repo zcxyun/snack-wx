@@ -4,3 +4,5 @@
     <text class="popup-login-text">微信一键登录</text>
   </l-button>
 </view>
+<l-loading full-screen show="{{loading}}" />
+
